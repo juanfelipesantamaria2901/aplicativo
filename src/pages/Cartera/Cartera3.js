@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DataTable from 'react-data-table-component';
+import { Input2 } from '../../Components/Inputs/styles';
+import {CSVLink} from 'react-csv'; 
 import {
     Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
     Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter, Table,
@@ -58,43 +60,43 @@ class VistaPlano extends Component {
                 name: 'Id Sede',
                 selector: 'id',
                 sortable: true,
-                center : true
+                center: true
             },
             {
                 name: 'Identificacion Cliente',
                 selector: 'Cliente',
                 sortable: true,
-                center : true
+                center: true
             },
             {
                 name: 'Nombre Cliente',
                 selector: 'Nombre',
                 sortable: true,
-                center : true
+                center: true
             },
             {
                 name: 'Articulo',
                 selector: 'Articulo',
                 sortable: true,
-                center : true
+                center: true
             },
             {
                 name: 'Valor Venta',
                 selector: 'Valorventa',
                 sortable: true,
-                center : true
+                center: true
             },
             {
                 name: 'Cant Id Documento',
                 selector: 'CantIdDocumento',
                 sortable: true,
-                center : true
+                center: true
             },
             {
                 name: 'Acciones',
                 selector: 'Acciones',
                 sortable: true,
-                center : true
+                center: true
             }
         ];
 
@@ -155,7 +157,7 @@ class VistaPlano extends Component {
                     {['sm'].map((expand) => (
                         <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
                             <Container fluid>
-                                <Navbar.Brand href="#"><i class="icon fa fa-eye"></i><b>Aplicativo Rivera</b></Navbar.Brand>
+                                <Navbar.Brand href="#"><i class="icon fa fa-eye"></i>&ensp;<b>Aplicativo Rivera</b></Navbar.Brand>
                                 <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                                 <Navbar.Offcanvas
                                     id={`offcanvasNavbar-expand-${expand}`}
@@ -258,59 +260,56 @@ class VistaPlano extends Component {
                     ))}
                 </header>
                 <div className="content">
-                <section className="content-header">
-                    <div className="container-fluid">
-                        <div className="row mb-2">
-                            <div className="col-sm-6">
-                                <h3>Vista Plano Cartera</h3>
-                            </div>
-                            <div className="col-sm-6">
-                                <ol className="breadcrumb float-sm-right">
-                                    <li className="breadcrumb-item active">Vista Plano Cartera</li>
-                                </ol>
+                    <section className="content-header">
+                        <div className="container-fluid">
+                            <div className="row mb-2">
+                                <div className="col-sm-6">
+                                    <h3>Vista Plano Cartera</h3>
+                                </div>
+                                <div className="col-sm-6">
+                                    <ol className="breadcrumb float-sm-right">
+                                        <li className="breadcrumb-item active">Vista Plano Cartera</li>
+                                    </ol>
+                                </div>
                             </div>
                         </div>
+                       <CSVLink data={tablaPlano} filename={"Exportacion.csv"}> <Button variant='warning' style={{ 'color': 'black' }}>Exportar</Button></CSVLink>
+                    </section>
+                    <div className="row">
                     </div>
-                </section>
-                <div className="row">
-                </div>
-                <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px'  , ' background-color':'#212121'}}>
-                    <div className="bg-warning">
-                        <Card.Title style={{ 'margin': '5px', 'border-radius': '6px 6px 6px 6px;' }} ><b>Vista Plano Cartera</b></Card.Title>
-                    </div>
-                    <div style={{ "border-radius": "5px", 'margin': '5px'  , ' background-color':'#212121'}}>
-                    <div className="table-responsive">
-                        <div className="barraBusqueda">
-                            <input
-                                type="text"
-                                placeholder="Buscar"
-                                className="textField"
-                                name="busqueda"
-                                value={this.state.busqueda}
-                                onChange={this.onChange}
-                            />
-                            <button type="button" className="btnBuscar" /*onClick={onClear}*/>
-                                {" "}
-                                <FontAwesomeIcon icon={faSearch} />
-                            </button>
+                    <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
+                            <div className="card-header bg-warning">
+                                <h3 className="card-title"><b>Vista Plano Cartera</b></h3>
+                            </div>
+                        <div style={{ "border-radius": "5px", 'margin': '5px', ' background-color': '#212121' }}>
+                            <div className="table-responsive">
+                                <div className="barraBusqueda">
+                                  <Input2
+                                        type="text"
+                                        placeholder="Buscar"
+                                        className="textField"
+                                        name="busqueda"
+                                        value={this.state.busqueda}
+                                        onChange={this.onChange}
+                                    /> 
+                                </div>
+                                <DataTable
+                                    striped
+                                    bordered
+                                    hover
+                                    columns={this.state.columnas}
+                                    responsive
+                                    data={this.state.planos}
+                                    pagination
+                                    paginationComponentOptions={paginacionOpciones}
+                                    fixedHeader
+                                    fixedHeaderScrollHeight="600px"
+                                    noDataComponent={<span>No se encontró ningún elemento</span>}
+                                />
+                            </div>
                         </div>
-                        <DataTable 
-                            striped 
-                            bordered 
-                            hover
-                            columns={this.state.columnas}
-                            responsive
-                            data={this.state.planos}
-                            pagination
-                            paginationComponentOptions={paginacionOpciones}
-                            fixedHeader
-                            fixedHeaderScrollHeight="600px"
-                            noDataComponent={<span>No se encontró ningún elemento</span>}
-                        />
-                    </div>
+                    </Card>
                 </div>
-                </Card>
-            </div>
             </div>
         );
     }
