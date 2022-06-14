@@ -1,163 +1,80 @@
-import React from 'react';
-import { MDBDataTableV5 } from 'mdbreact';
+import React, { useEffect, useState } from 'react';
+import DataTable , {createTheme}from 'react-data-table-component';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import {
-  Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
-  Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter,
+  Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form, Card,
 } from 'react-bootstrap';
-import {
-  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-  MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon
-} from "mdbreact";
+
+const paginacionOpciones = {
+  rowsPerPageText: 'Filas por Página',
+  rangeSeparatorText: 'de',
+  selectAllRowsItem: true,
+  selectAllRowsItemText: 'Todos',
+}
 
 const Tabla = () => {
-  const [datatable, setDatatable] = React.useState({
-    columns: [
-      {
-        label: 'Identificacion Master',
-        field: 'identificacionMaster',
-        width: 250,
-      },
-      {
-        label: 'Tercer Master',
-        field: 'tercerMaster',
-        width: 270,
-      },
-      {
-        label: 'Identificacion',
-        field: 'identificacion',
-        width: 200,
-      },
-      {
-        label: 'Nombre',
-        field: 'nombre',
-        sort: 'asc',
-        width: 100,
-      },
-      {
-        label: 'Acciones',
-        field: 'acciones',
-        sort: 'disabled',
-        width: 150,
-      },
-    ],
-    rows: [
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '4564846516',
-        tercerMaster: '	TRANSCARGA',
-        identificacion: '4864654',
-        nombre: 'FLOTA TRANSCARGA',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '4564846516',
-        tercerMaster: '	TRANSCARGA',
-        identificacion: '4864654',
-        nombre: 'FLOTA TRANSCARGA',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '4564846516',
-        tercerMaster: '	TRANSCARGA',
-        identificacion: '4864654',
-        nombre: 'FLOTA TRANSCARGA',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '4564846516',
-        tercerMaster: '	TRANSCARGA',
-        identificacion: '4864654',
-        nombre: 'FLOTA TRANSCARGA',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '4564846516',
-        tercerMaster: '	TRANSCARGA',
-        identificacion: '4864654',
-        nombre: 'FLOTA TRANSCARGA',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '805000253',
-        tercerMaster: 'GLOBOLLANTAS LTDA',
-        identificacion: '123546',
-        nombre: 'GERENCIA TELECOMUNICACIONES EMCALI',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-      {
-        identificacionMaster: '4564846516',
-        tercerMaster: '	TRANSCARGA',
-        identificacion: '4864654',
-        nombre: 'FLOTA TRANSCARGA',
-        acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>,
-      },
-    ],
-  });
+  
+
+  const [relacional, setData] = useState([]);
+
+  const URL = 'http://192.168.0.19:3001/api/relacional'
+
+  const showData = async () => {
+
+    const response = await fetch(URL)
+
+    const data = await response.json()
+
+    setData(data)
+
+  }
+  useEffect(() => {
+    showData()
+  }
+    , [])
+
+  const columns = [{
+    name: 'Identificacion Master',
+    selector: row => row.IdentificacionMaster,
+  },
+  {
+    name: 'Tercero Master',
+    selector: row => row.TerceroMaster,
+  },
+  {
+    name: 'Identificacion',
+    selector: row => row.Identificacion,
+  },
+  {
+    name: 'Nombre',
+    selector: row => row.Nombre,
+  },
+  ]
+
+  createTheme('custom-theme', {
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#FFFFFF',
+    },
+    background: {
+      default: '#262625',
+    },
+    context: {
+      background: '#262625',
+      text: '#FFFFFF',
+    },
+    divider: {
+      default: '#262625',
+    },
+    action: {
+      button: 'rgba(0,0,0,.54)',
+      hover: 'rgba(0,0,0,.08)',
+      disabled: 'rgba(0,0,0,.12)',
+    },
+  },'dark' );
+
 
   return (
     <div>
@@ -206,7 +123,7 @@ const Tabla = () => {
                       title="Cartera"
                       id={`offcanvasNavbarDropdown-expand-${expand}`}>
                       <li>
-                        <NavDropdown.Item href="/Cartera" >Cartera</NavDropdown.Item>
+                      <NavDropdown.Item href="/Cartera">Cartera</NavDropdown.Item>
                       </li>
                       <li>
                         <NavDropdown.Item href="/Tabla" active>
@@ -304,32 +221,30 @@ const Tabla = () => {
             </div>
           </div>
           <Button variant='warning' style={{ 'color': 'black' }} href="/Registro_Relacional">Agregar</Button>
-           <Button variant='warning' style={{ 'color': 'black' }}>Confirmar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }}>Editar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }}>Confirmar</Button>
         </section>
         <div className="row">
         </div>
         <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
-            <div className="card-header bg-warning">
-                                <h3 className="card-title"><b>Tabla Relacional</b></h3>
-                            </div>
+          <div className="card-header bg-warning">
+            <h3 className="card-title"><b>Tabla Relacional</b></h3>
+          </div>
         </Card>
       </div>
       <div style={{ "border-radius": "5px", 'margin': '5px', ' background-color': '#212121' }}>
-        <MDBDataTableV5
-          tbodyTextWhite={true}
-          theadColor='elegant-color-dark'
-          tbodyColor='elegant-color-dark'
-          theadTextWhite={true}
-          responsive
+        <DataTable
+          bordered
           hover
-          entriesOptions={[10, 20, 25]}
-          entries={10}
-          pagesAmount={4}
-          data={datatable}
-          searchLabel="Buscar"
-          pagingBottom
-          searchTop
-          searchBottom={false}
+          theme='custom-theme'
+          columns={columns}
+          responsive
+          data={relacional}
+          pagination
+          paginationComponentOptions={paginacionOpciones}
+          fixedHeader
+          fixedHeaderScrollHeight="600px"
+          noDataComponent={<span>No se encontró ningún elemento</span>}
         />
       </div>
     </div>

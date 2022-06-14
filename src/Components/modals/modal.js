@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import {
-    Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
-    Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter, Table, DatePicker,
+    Button, Nav, 
 } from 'react-bootstrap';
 import Inpunt from '../Inputs/Input';
 import { Select, Label } from '../Inputs/styles';
@@ -16,7 +15,7 @@ const Modal = () => {
     //Mehotd for sent data to API
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://127.0.0.1:3001/api/cartera`, {
+        const res = await fetch(`http://192.168.0.19:3001/api/relacional`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -46,9 +45,11 @@ const Modal = () => {
         });
         const data = await res.json();
         console.log(data);
-        window.alert("¡Informacion Guardada exitosamente!");
-        // alert.show("¡Informacion Guardada exitosamente!, por favor diligenciar la infromacion de padre y madre",
-        //"de lo contrario la infromacion del acudiante");
+        if (data != null) {
+            window.alert("¡Informacion Guardada exitosamente!");
+        }else{
+            window.alert("¡Error al guardar la informacion!");
+        }
     }
 
     //Values of the form to be sent to the API

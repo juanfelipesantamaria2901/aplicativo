@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBDataTableV5, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody
+     MDBRow, MDBCol, MDBCard, MDBCardBody
     , MDBCardTitle, MDBCardText, MDBBtn
 } from "mdbreact";
 import {
     Button, Navbar, Container, NavDropdown, Offcanvas, Nav, FormControl, Form,
-    Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter,
+    Card, 
 } from 'react-bootstrap';
 
 

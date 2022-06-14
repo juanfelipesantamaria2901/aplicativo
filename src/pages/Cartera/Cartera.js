@@ -1,21 +1,12 @@
 import { React, Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import Modal from '../../Components/modals/modal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { Tabla } from '../../Components/Tablas/Tabla';
-import { Link } from 'react-router-dom';
 import {
-    Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
-    Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter, Table, form, FormGroup, Label, Input, Col, Row,
+    Button, Navbar, Nav,  NavDropdown, Container, Offcanvas, FormControl, Form,
+    Card,  Table,
 } from 'react-bootstrap';
-import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBDataTableV5, MDBContainer, MDBRow, MDBCol,
-} from "mdbreact";
+
 
 
 class Cartera extends Component {

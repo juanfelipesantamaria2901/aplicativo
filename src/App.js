@@ -21,7 +21,7 @@ function App() {
         {/* Tabla */}
         <Route path="/Tabla" element={<Tabla />} />
         {/* Login*/}
-        <Route path="/Login" element={<Login/>} />
+        <Route path="/" element={<Login/>} />
         {/* Dashboard*/}
         <Route path="/Dashboard" element={<Dashboard/>} />        
       </Routes>

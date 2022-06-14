@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import DataTable from 'react-data-table-component';
+import DataTable, {createTheme} from 'react-data-table-component';
 import { Input2 } from '../../Components/Inputs/styles';
 import {CSVLink} from 'react-csv'; 
 import {
-    Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
-    Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter, Table,
+    Button, Navbar, Nav,  NavDropdown,  Container, Offcanvas, FormControl, Form,
+    Card,
 } from 'react-bootstrap';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 
 const tablaPlano = [
     { Cliente: "705361607", Nombre: "Juan Felipe Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
@@ -32,6 +31,27 @@ const tablaPlano = [
     { Cliente: "914361607", Nombre: "Juan Felipe Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
 ];
 
+createTheme('custom-theme', {
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#FFFFFF',
+    },
+    background: {
+      default: '#262625',
+    },
+    context: {
+      background: '#262625',
+      text: '#FFFFFF',
+    },
+    divider: {
+      default: '#262625',
+    },
+    action: {
+      button: 'rgba(0,0,0,.54)',
+      hover: 'rgba(0,0,0,.08)',
+      disabled: 'rgba(0,0,0,.12)',
+    },
+  },'dark' );
 
 const paginacionOpciones = {
     rowsPerPageText: 'Filas por Página',
