@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component }  from 'react';
 import DataTable, {createTheme} from 'react-data-table-component';
 import { Input2 } from '../../Components/Inputs/styles';
 import {CSVLink} from 'react-csv'; 
@@ -6,6 +6,7 @@ import {
     Button, Navbar, Nav,  NavDropdown,  Container, Offcanvas, FormControl, Form,
     Card,
 } from 'react-bootstrap';
+import { useState } from 'react';
 
 
 const tablaPlano = [
@@ -261,7 +262,7 @@ class VistaPlano extends Component {
                                                 <NavDropdown.Item class="dropdown-item" href="#">Configuracion</NavDropdown.Item>
                                             </li>
                                             <li>
-                                                <NavDropdown.Item class="dropdown-item" href="#">Salir</NavDropdown.Item>
+                                                <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
                                             </li>
                                         </NavDropdown>
                                         <Form className="d-flex">

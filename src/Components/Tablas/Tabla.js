@@ -188,7 +188,7 @@ const Tabla = () => {
                       <NavDropdown.Item class="dropdown-item" href="#">Configuracion</NavDropdown.Item>
                     </li>
                     <li>
-                      <NavDropdown.Item class="dropdown-item" href="#">Salir</NavDropdown.Item>
+                      <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
                     </li>
                   </NavDropdown>
                   <Form className="d-flex">

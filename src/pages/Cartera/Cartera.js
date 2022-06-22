@@ -1,4 +1,4 @@
-import { React, Component } from 'react';
+import { React, Component, useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -7,25 +7,50 @@ import {
     Card,  Table,
 } from 'react-bootstrap';
 
+//,[IdTurno]
+//,[CodigoIsla]
+//,[Vendedor]
+//,[IdentificacionCliente]
+//,[NombreCliente]
+//,[IdDocumento]
+//,[Articulo]
+//,[VolumenVenta]
+//,[ValorUnitario]
+//,[ValorVenta]
+//,[Placa]
+//,[FormasPago]
+//,[CodigoCara]
+//,[CodigoManguera]
+//,[PrefijoFactura]
+//,[NumeroFactura]
+//,[FechaZeta]
+//,[Fecha]
+//,[Hora]
+
+const URL = 'http://192.168.0.19:3001/api/cartera'
+
+const showData = async () => {
+
+  const response = await fetch(URL)
+
+  const data = await response.json()
+  console.log(data)
+  return data;
+}
 
 
 class Cartera extends Component {
-    constructor() {
-        super();
-        this.state = {
-            show: false
-        };
-        this.showModal = this.showModal.bind(this);
-        this.hideModal = this.hideModal.bind(this);
-    }
-
-    showModal = () => {
-        this.setState({ show: true });
-    };
-
-    hideModal = () => {
-        this.setState({ show: false });
-    };
+    state = {
+        data: showData,
+        modalActualizar: false,
+        modalInsertar: false,
+        form: {
+          id: "",
+          personaje: "",
+          anime: "",
+        },
+      };
+    
 
     render() {
         return (
@@ -137,7 +162,7 @@ class Cartera extends Component {
                                                 <NavDropdown.Item class="dropdown-item" href="#">Configuracion</NavDropdown.Item>
                                             </li>
                                             <li>
-                                                <NavDropdown.Item class="dropdown-item" href="#">Salir</NavDropdown.Item>
+                                                <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
                                             </li>
                                         </NavDropdown>
                                         <Form className="d-flex">
@@ -200,7 +225,7 @@ class Cartera extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr >
                                         <td>1</td>
                                         <td>1982</td>
                                         <td>2</td>
