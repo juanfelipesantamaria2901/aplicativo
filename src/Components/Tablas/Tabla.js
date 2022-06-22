@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import DataTable , {createTheme}from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -15,7 +15,7 @@ const paginacionOpciones = {
 }
 
 const Tabla = () => {
-  
+
 
   const [relacional, setData] = useState([]);
 
@@ -73,7 +73,7 @@ const Tabla = () => {
       hover: 'rgba(0,0,0,.08)',
       disabled: 'rgba(0,0,0,.12)',
     },
-  },'dark' );
+  }, 'dark');
 
 
   return (
@@ -123,17 +123,23 @@ const Tabla = () => {
                       title="Cartera"
                       id={`offcanvasNavbarDropdown-expand-${expand}`}>
                       <li>
-                      <NavDropdown.Item href="/Cartera">Cartera</NavDropdown.Item>
+                        <NavDropdown.Item href="/Cartera">Cartera</NavDropdown.Item>
                       </li>
                       <li>
-                        <NavDropdown.Item href="/Tabla" active>
+                        <NavDropdown.Item  active href="/Tabla">
                           Tabla Relacional
                         </NavDropdown.Item>
                       </li>
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item href="/Vista">
-                        Vista Plano
-                      </NavDropdown.Item>
+                      <li>
+                        <NavDropdown.Item href="/Vista">
+                          Vista Plano
+                        </NavDropdown.Item>
+                      </li>
+                      <li>
+                        <NavDropdown.Item href="/DatosCartera">
+                          Prueba Datos
+                        </NavDropdown.Item>
+                      </li>
                     </NavDropdown>
                     <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                     <Nav.Link href="/Ingreso">Ingreso</Nav.Link>

@@ -1,10 +1,10 @@
-import { React, Component, useEffect, useState } from 'react';
+import { React, Component } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import {
-    Button, Navbar, Nav,  NavDropdown, Container, Offcanvas, FormControl, Form,
-    Card,  Table,
+    Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form,
+    Card, Table,
 } from 'react-bootstrap';
 
 //,[IdTurno]
@@ -31,11 +31,11 @@ const URL = 'http://192.168.0.19:3001/api/cartera'
 
 const showData = async () => {
 
-  const response = await fetch(URL)
+    const response = await fetch(URL)
 
-  const data = await response.json()
-  console.log(data)
-  return data;
+    const data = await response.json()
+    console.log(data)
+    return data;
 }
 
 
@@ -45,12 +45,12 @@ class Cartera extends Component {
         modalActualizar: false,
         modalInsertar: false,
         form: {
-          id: "",
-          personaje: "",
-          anime: "",
+            id: "",
+            personaje: "",
+            anime: "",
         },
-      };
-    
+    };
+
 
     render() {
         return (
@@ -104,10 +104,16 @@ class Cartera extends Component {
                                                         Tabla Relacional
                                                     </NavDropdown.Item>
                                                 </li>
-                                                <NavDropdown.Divider />
-                                                <NavDropdown.Item href="/Vista">
-                                                    Vista Plano
-                                                </NavDropdown.Item>
+                                                <li>
+                                                    <NavDropdown.Item href="/Vista">
+                                                        Vista Plano
+                                                    </NavDropdown.Item>
+                                                </li>
+                                                <li>
+                                                    <NavDropdown.Item href="/DatosCartera">
+                                                        Prueba Datos
+                                                    </NavDropdown.Item>
+                                                </li>
                                             </NavDropdown>
                                             <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                                             <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
@@ -201,13 +207,12 @@ class Cartera extends Component {
                     </div>
                     <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
                         <div className="card-header bg-warning">
-                                <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
-                            </div>
+                            <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
+                        </div>
                         <div style={{ 'border-radiusr': '5px', ' background-color': '#212121' }}>
                             <Table striped bordered hover responsive size="sm" variant="dark" style={{ "margin": "0px", 'width': '85%', 'border-radius': '6px 6px 6px 6px;' }}>
                                 <thead>
                                     <tr>
-                                    </tr><tr>
                                         <th colSpan={1}>Sede</th>
                                         <th colSpan={1}>Turno</th>
                                         <th colSpan={1}>Isla*</th>
@@ -247,7 +252,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>2</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>805000253</td>
@@ -268,7 +273,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>3</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -289,7 +294,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>4</td>
                                         <td>1983</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -310,7 +315,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>5</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -331,7 +336,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>6</td>
                                         <td>1985</td>
                                         <td>3</td>
                                         <td>805361607</td>
@@ -352,7 +357,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>7</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -373,7 +378,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>8</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -394,7 +399,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>9</td>
                                         <td>1988</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -415,7 +420,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>10</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -436,7 +441,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>11</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>
@@ -457,7 +462,7 @@ class Cartera extends Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>12</td>
                                         <td>1980</td>
                                         <td>2</td>
                                         <td>900361607</td>

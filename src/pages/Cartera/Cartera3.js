@@ -1,9 +1,9 @@
-import React, { Component }  from 'react';
-import DataTable, {createTheme} from 'react-data-table-component';
+import React, { Component } from 'react';
+import DataTable, { createTheme } from 'react-data-table-component';
 import { Input2 } from '../../Components/Inputs/styles';
-import {CSVLink} from 'react-csv'; 
+import { CSVLink } from 'react-csv';
 import {
-    Button, Navbar, Nav,  NavDropdown,  Container, Offcanvas, FormControl, Form,
+    Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form,
     Card,
 } from 'react-bootstrap';
 import { useState } from 'react';
@@ -34,25 +34,25 @@ const tablaPlano = [
 
 createTheme('custom-theme', {
     text: {
-      primary: '#FFFFFF',
-      secondary: '#FFFFFF',
+        primary: '#FFFFFF',
+        secondary: '#FFFFFF',
     },
     background: {
-      default: '#262625',
+        default: '#262625',
     },
     context: {
-      background: '#262625',
-      text: '#FFFFFF',
+        background: '#262625',
+        text: '#FFFFFF',
     },
     divider: {
-      default: '#262625',
+        default: '#262625',
     },
     action: {
-      button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
-      disabled: 'rgba(0,0,0,.12)',
+        button: 'rgba(0,0,0,.54)',
+        hover: 'rgba(0,0,0,.08)',
+        disabled: 'rgba(0,0,0,.12)',
     },
-  },'dark' );
+}, 'dark');
 
 const paginacionOpciones = {
     rowsPerPageText: 'Filas por Página',
@@ -204,10 +204,16 @@ class VistaPlano extends Component {
                                                         Tabla Relacional
                                                     </NavDropdown.Item>
                                                 </li>
-                                                <NavDropdown.Divider />
-                                                <NavDropdown.Item href="/Vista" active>
-                                                    Vista Plano
-                                                </NavDropdown.Item>
+                                                <li>
+                                                    <NavDropdown.Item active href="/Vista">
+                                                        Vista Plano
+                                                    </NavDropdown.Item>
+                                                </li>
+                                                <li>
+                                                    <NavDropdown.Item href="/DatosCartera">
+                                                        Prueba Datos
+                                                    </NavDropdown.Item>
+                                                </li>
                                             </NavDropdown>
                                             <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                                             <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
@@ -294,29 +300,30 @@ class VistaPlano extends Component {
                                 </div>
                             </div>
                         </div>
-                       <CSVLink data={tablaPlano} filename={"Exportacion.csv"}> <Button variant='warning' style={{ 'color': 'black' }}>Exportar</Button></CSVLink>
+                        <CSVLink data={tablaPlano} filename={"Exportacion.csv"}> <Button variant='warning' style={{ 'color': 'black' }}>Exportar</Button></CSVLink>
                     </section>
                     <div className="row">
                     </div>
                     <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
-                            <div className="card-header bg-warning">
-                                <h3 className="card-title"><b>Vista Plano Cartera</b></h3>
-                            </div>
+                        <div className="card-header bg-warning">
+                            <h3 className="card-title"><b>Vista Plano Cartera</b></h3>
+                        </div>
                         <div style={{ "border-radius": "5px", 'margin': '5px', ' background-color': '#212121' }}>
                             <div className="table-responsive">
                                 <div className="barraBusqueda">
-                                  <Input2
+                                    <Input2
                                         type="text"
                                         placeholder="Buscar"
                                         className="textField"
                                         name="busqueda"
                                         value={this.state.busqueda}
                                         onChange={this.onChange}
-                                    /> 
+                                    />
                                 </div>
                                 <DataTable
                                     striped
                                     bordered
+                                    editabled
                                     hover
                                     columns={this.state.columnas}
                                     responsive

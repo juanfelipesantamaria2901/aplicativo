@@ -1,16 +1,12 @@
 import React from "react";
 import './Login.css';
-import ReactRedirect from 'react-router-dom';
 // import  { Redirect } from 'react-router-dom'
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 import {
-    Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
-    Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter, Table, DatePicker,
+    Button,Form,
 } from 'react-bootstrap';
-import { Fondo } from '../../images/TERRALUZ_GRUPOMARTI_004.jpg';
-import axios from 'axios';
-import md5 from 'md5';
-import cookie from 'cookie';
+//import axios from 'axios';
+//import md5 from 'md5';
+//import cookie from 'cookie';
 
 //const valit =() =>{
   //  if(this.state.Form.username ==="Admin" && this.state.Form.password ==="123"){

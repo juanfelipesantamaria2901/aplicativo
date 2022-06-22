@@ -1,6 +1,7 @@
 import './App.css';
 import Cartera from './pages/Cartera/Cartera';
 import VistaPlano from './pages/Cartera/Cartera3';
+import Cartera4 from './pages/Cartera/Cartera4';
 import Tabla from './Components/Tablas/Tabla';
 import Modal from './Components/modals/modal';
 import Modal2 from './Components/modals/modal2';
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         {/* Cartera */}
         <Route path="/Cartera" element={<Cartera />} />
+        <Route path="/DatosCartera" element={<Cartera4 />} />
         <Route path="/Registro_Cartera" element={<Modal />} />
         <Route path="/Registro_Relacional" element={<Modal2 />} />
         {/* VistaPlano */}
