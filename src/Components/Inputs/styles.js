@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 
 const Label = styled.label`
 background: -webkit-linear-gradient(25deg,#000000,#000000 60%);

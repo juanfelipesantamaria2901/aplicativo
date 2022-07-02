@@ -56,7 +56,7 @@ const Tabla = () => {
   createTheme('custom-theme', {
     text: {
       primary: '#FFFFFF',
-      secondary: '#FFFFFF',
+      secondary: '#f8a51e',
     },
     background: {
       default: '#262625',
@@ -227,7 +227,6 @@ const Tabla = () => {
             </div>
           </div>
           <Button variant='warning' style={{ 'color': 'black' }} href="/Registro_Relacional">Agregar</Button>
-          <Button variant='warning' style={{ 'color': 'black' }}>Editar</Button>
           <Button variant='warning' style={{ 'color': 'black' }}>Confirmar</Button>
         </section>
         <div className="row">

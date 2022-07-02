@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import DataTable, { createTheme } from 'react-data-table-component';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import 'styled-components'
+import './Cartera.css';
+import Compoentedata from './Data';
+//import Example from './DatePiker';
 import {
     Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form,
-    Card, Table,
 } from 'react-bootstrap';
-import { data } from '../Dashboard/Dashboard';
 
 //,[IdTurno]
 //,[CodigoIsla]
@@ -29,139 +30,55 @@ import { data } from '../Dashboard/Dashboard';
 //,[Fecha]
 //,[Hora]
 
+//<DataTable
+//bordered
+//hover
+//theme='custom-theme'
+//responsive
+//columns={columns}
+//data={cartera}
+//pagination
+//paginationComponentOptions={paginacionOpciones}
+//fixedHeader
+//fixedHeaderScrollHeight="1000px"
+//noDataComponent={<span>No se encontró ningún elemento</span>} >
+//</DataTable>
 
-
-const paginacionOpciones = {
-    rowsPerPageText: 'Filas por Página',
-    rangeSeparatorText: 'de',
-    selectAllRowsItem: true,
-    selectAllRowsItemText: 'Todos',
-}
 
 
 const Cartera4 = () => {
     const [cartera, setData] = useState([]);
-
     const URL = 'http://192.168.0.19:3001/api/cartera'
 
+
     const showData = async () => {
-
         const response = await fetch(URL)
-
         const data = await response.json()
-
         setData(data)
-
     }
     useEffect(() => {
         showData()
+    }, [])
+
+    const [cartera2, setData2] = useState([]);
+    const URL2 = 'http://192.168.0.19:3001/api/sum'
+    const showData2 = async () => {
+        const response = await fetch(URL2)
+        const data2 = await response.json()
+        setData2(data2)
+        console.log(data2[0].Cantidad)
+        console.log(data2[0].TotalVolumen)
+        console.log(data2[0].TotalVenta)
     }
-        , [])
-   
-        const columns = [{
-            name: 'Sede',
-            selector: row => row.IdSede,
-          },
-          {
-            name: 'Turno',
-            selector: row => row.IdTurno,
-          },
-          {
-            name: 'Isla',
-            selector: row => row.CodigoIsla,
-          },
-          {
-            name: 'Vendedor',
-            selector: row => row.Vendedor,
-          },
-          {
-            name: 'Identificacion Cliente',
-            selector: row => row.IdentificacionCliente,
-          },
-          {
-            name: 'Cliente',
-            selector: row => row.NombreCliente,
-          },
-          {
-            name: 'Id Doc',
-            selector: row => row.IdDocumento,
-          },
-          {
-            name: 'Articulo',
-            selector: row => row.Articulo,
-          },
-          {
-            name: 'Volumen',
-            selector: row => row.VolumenVenta,
-          },
-          {
-            name: 'Valor Unitario',
-            selector: row => row.ValorUnitario,
-          },
-          {
-            name: 'Total',
-            selector: row => row.ValorVenta,
-          },
-          {
-            name: 'Placa',
-            selector: row => row.Placa,
-          },
-          {
-            name: 'Forma Pago',
-            selector: row => row.FormasPago,
-          },
-          {
-            name: 'Cara',
-            selector: row => row.CodigoCara,
-          },
-          {
-            name: 'Mangueral',
-            selector: row => row.CodigoManguera,
-          },
-          {
-            name: 'Factura',
-            selector: row => row.PrefijoFactura,
-          },
-          {
-            name: 'NumFactura',
-            selector: row => row.NumeroFactura,
-          },
-          {
-            name: 'Fecha Zeta',
-            selector: row => row.FechaZeta,
-          },
-          {
-            name: 'Fecha',
-            selector: row => row.Fecha,
-          },
-          {
-            name: 'Hora',
-            selector: row => row.Hora,
-          },
-          ]
+    useEffect(() => {
+        showData2()
+    }, [])
 
+    const [disable, setDisable] = React.useState(false);
 
-    createTheme('custom-theme', {
-        text: {
-            primary: '#FFFFFF',
-            secondary: '#FFFFFF',
-        },
-        background: {
-            default: '#262625',
-        },
-        context: {
-            background: '#262625',
-            text: '#FFFFFF',
-        },
-        divider: {
-            default: '#262625',
-        },
-        action: {
-            button: 'rgba(0,0,0,.54)',
-            hover: 'rgba(0,0,0,.08)',
-            disabled: 'rgba(0,0,0,.12)',
-        },
-    }, 'dark');
+    let toast1 = cartera2[0].Cantidad
+    let toast2 = cartera2[0].TotalVolumen
+    let toast3 = cartera2[0].TotalVenta
 
     return (
         <div>
@@ -204,27 +121,27 @@ const Cartera4 = () => {
                                     <Nav className="justify-content-end flex-grow-1 pe-3">
                                         <Nav.Link href="/Dashboard"  >Dashboard</Nav.Link>
                                         <NavDropdown
-                                                title="Cartera"
-                                                id={`offcanvasNavbarDropdown-expand-${expand}`}>
-                                                <li>
-                                                    <NavDropdown.Item href="/Cartera" >Cartera</NavDropdown.Item>
-                                                </li>
-                                                <li>
-                                                    <NavDropdown.Item href="/Tabla">
-                                                        Tabla Relacional
-                                                    </NavDropdown.Item>
-                                                </li>
-                                                <li>
-                                                    <NavDropdown.Item href="/Vista">
-                                                        Vista Plano
-                                                    </NavDropdown.Item>
-                                                </li>
-                                                <li>
-                                                    <NavDropdown.Item  active href="/DatosCartera">
-                                                        Prueba Datos
-                                                    </NavDropdown.Item>
-                                                </li>
-                                            </NavDropdown>
+                                            title="Cartera"
+                                            id={`offcanvasNavbarDropdown-expand-${expand}`}>
+                                            <li>
+                                                <NavDropdown.Item href="/Cartera" >Cartera</NavDropdown.Item>
+                                            </li>
+                                            <li>
+                                                <NavDropdown.Item href="/Tabla">
+                                                    Tabla Relacional
+                                                </NavDropdown.Item>
+                                            </li>
+                                            <li>
+                                                <NavDropdown.Item href="/Vista">
+                                                    Vista Plano
+                                                </NavDropdown.Item>
+                                            </li>
+                                            <li>
+                                                <NavDropdown.Item active href="/DatosCartera">
+                                                    Prueba Datos
+                                                </NavDropdown.Item>
+                                            </li>
+                                        </NavDropdown>
                                         <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                                         <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
                                     </Nav>
@@ -310,31 +227,39 @@ const Cartera4 = () => {
                             </div>
                         </div>
                     </div>
-                    <Button variant='warning' style={{ 'color': 'black' }} href={"/Registro_Cartera"} >Agregar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }}>Confirmar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} href={"/Registro_Cartera"} >Agregar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href={"/Actualizar"} >Actualizar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }}  onClick={() => setDisable(false)}>Cancelar</Button>
                 </section>
                 <div className="row">
+                <div bg={'dark'} style={{ width: '250px', height: '60px' , margin: '25px' , color: '#f8a51e', backgroundColor: '#171616'}}
+                        text={'white'}
+                        className="card">
+                        <div classname="card head"><b>Transacciones Totales:</b></div>
+                        <div className="card body"style={{ color: '#ffffff', backgroundColor: '#171616'}}>{toast1}</div>
+                    </div>
+                    <div bg={'dark'} style={{ width: '250px', height: '60px' , margin: '25px' , color: '#f8a51e', backgroundColor: '#171616'}}
+                        text={'white'}
+                        className="card">
+                        <div classname="card head"> <b>Total Volumen Ventas: </b></div>
+                        <div className="card body"style={{ color: '#ffffff', backgroundColor: '#171616'}}>{toast2}</div>
+                    </div>
+                    <div bg={'dark'} style={{ width: '250px', height: '60px' , margin: '25px' , color: '#f8a51e', backgroundColor: '#171616'}}
+                        text={'white'}
+                        className="card">
+                        <div classname="card head"><b>Total Valor de Ventas:</b></div>
+                        <div className="card body"style={{ color: '#ffffff', backgroundColor: '#171616'}}>{toast3}</div>
+                    </div>
                 </div>
-                <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
+                <div style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
                     <div className="card-header bg-warning">
                         <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
                     </div>
-                    <div style={{ 'border-radiusr': '5px', ' background-color': '#212121', 'margin-right':'8px'}}>
-                        <DataTable
-                            bordered
-                            hover
-                            theme='custom-theme'
-                            responsive
-                            columns={columns}
-                            data={cartera}
-                            pagination
-                            paginationComponentOptions={paginacionOpciones}
-                            fixedHeader
-                            fixedHeaderScrollHeight="1000px"
-                            noDataComponent={<span>No se encontró ningún elemento</span>}>
-                        </DataTable>
+                    <div style={{ 'border-radiusr': '5px', ' background-color': '#212121', 'margin-right': '8px' }}>
+                    <Compoentedata />
                     </div>
-                </Card>
+                </div>
             </div>
         </div>
     );

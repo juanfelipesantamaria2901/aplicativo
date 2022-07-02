@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, NavLink, Container, Offcanvas, FormControl, Form,
-  Card, CardGroup, CardDeck, CardColumns, CardBody, CardHeader, CardFooter, Table, form, FormGroup, FormLabel, FormTextProps, Col, Row
-} from 'react-bootstrap';
-import { Label, GrupoInput, Input, Select } from './styles';
+import { Label, GrupoInput, Input} from './styles';
 
 //llamo los atributos a usar
 const Inpunt = ({ estado, cambiarEstado, name, type, label,

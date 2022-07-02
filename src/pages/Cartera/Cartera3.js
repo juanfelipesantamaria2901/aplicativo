@@ -2,47 +2,56 @@ import React, { Component } from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
 import { Input2 } from '../../Components/Inputs/styles';
 import { CSVLink } from 'react-csv';
+import 'styled-components' 
+import './Cartera.css';
 import {
     Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form,
-    Card,
+    Card, 
 } from 'react-bootstrap';
-import { useState } from 'react';
 
 
 const tablaPlano = [
-    { Cliente: "705361607", Nombre: "Juan Felipe Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "810361607", Nombre: "Liliana parra", Articulo: "DIESEL", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "850361607", Nombre: "Benito antonio martinez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "900381507", Nombre: "Andres Parra sierra", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "707361807", Nombre: "Gustavo avila rodigrez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "900361607", Nombre: "Crinstian parra sierra", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "820381607", Nombre: "Jesus antonio martinez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "705368808", Nombre: "Andres Jose Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button>, },
-    { Cliente: "920561708", Nombre: "Manchester United FC", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "985361607", Nombre: "Jesus antonio martinez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "908361608", Nombre: "Gustavo avila rodigrez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "902361607", Nombre: "Juan Felipe Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "920361607", Nombre: "Andres Jose Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}> Editar</Button> },
-    { Cliente: "936361607", Nombre: "Gustavo avila rodigrez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "982361607", Nombre: "Jesus antonio martinez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "992361607", Nombre: "Juan Felipe Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "919361607", Nombre: "Crinstian parra sierra", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "956361607", Nombre: "Andres Jose Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "902561607", Nombre: "Real Madrid CF", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
-    { Cliente: "914361607", Nombre: "Juan Felipe Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Acciones: <Button variant="warning" style={{ 'color': 'black' }}>Editar</Button> },
+    { Cliente: "705361607", Nombre: "Juan Felipe Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-01-01",},
+    { Cliente: "810361607", Nombre: "Liliana parra", Articulo: "DIESEL", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-02-01",},
+    { Cliente: "850361607", Nombre: "Benito antonio martinez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-03-01",},
+    { Cliente: "900381507", Nombre: "Andres Parra sierra", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-04-01",},
+    { Cliente: "707361807", Nombre: "Gustavo avila rodigrez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-05-01",},
+    { Cliente: "900361607", Nombre: "Crinstian parra sierra", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-06-01",},
+    { Cliente: "820381607", Nombre: "Jesus antonio martinez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-07-01",},
+    { Cliente: "705368808", Nombre: "Andres Jose Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-08-01",},
+    { Cliente: "920561708", Nombre: "Manchester United FC", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-09-01",},
+    { Cliente: "985361607", Nombre: "Jesus antonio martinez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-10-01",},
+    { Cliente: "908361608", Nombre: "Gustavo avila rodigrez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-11-01",},
+    { Cliente: "902361607", Nombre: "Juan Felipe Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-01",},
+    { Cliente: "920361607", Nombre: "Andres Jose Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-02",},
+    { Cliente: "936361607", Nombre: "Gustavo avila rodigrez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-03",},
+    { Cliente: "982361607", Nombre: "Jesus antonio martinez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-04",},
+    { Cliente: "992361607", Nombre: "Juan Felipe Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-05",},
+    { Cliente: "919361607", Nombre: "Crinstian parra sierra", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-06",},
+    { Cliente: "956361607", Nombre: "Andres Jose Ramirez", Articulo: "GASOLINA CORRIENTE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-07",},
+    { Cliente: "902561607", Nombre: "Real Madrid CF", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-08",},
+    { Cliente: "914361607", Nombre: "Juan Felipe Ramirez", Articulo: "DIESE", Valorventa: "13,184", CantIdDocumento: "8", Fecha: "2020-12-09",},
 ];
+
+const paginacionOpciones = {
+    rowsPerPageText: 'Filas por Página',
+    rangeSeparatorText: 'de',
+    selectAllRowsItem: true,
+    selectAllRowsItemText: 'Todos',
+}
 
 createTheme('custom-theme', {
     text: {
         primary: '#FFFFFF',
-        secondary: '#FFFFFF',
+        secondary: '#f8a51e',
     },
     background: {
         default: '#262625',
+        secondary: '#262625',
     },
     context: {
         background: '#262625',
-        text: '#FFFFFF',
+        text: '#f8a51e',
     },
     divider: {
         default: '#262625',
@@ -53,13 +62,6 @@ createTheme('custom-theme', {
         disabled: 'rgba(0,0,0,.12)',
     },
 }, 'dark');
-
-const paginacionOpciones = {
-    rowsPerPageText: 'Filas por Página',
-    rangeSeparatorText: 'de',
-    selectAllRowsItem: true,
-    selectAllRowsItemText: 'Todos',
-}
 
 class VistaPlano extends Component {
     state = {
@@ -114,8 +116,8 @@ class VistaPlano extends Component {
                 center: true
             },
             {
-                name: 'Acciones',
-                selector: 'Acciones',
+                name: 'Fecha',
+                selector: 'Fecha',
                 sortable: true,
                 center: true
             }
@@ -130,8 +132,9 @@ class VistaPlano extends Component {
                 item.Nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(this.state.busqueda) ||
                 item.Articulo.toLowerCase().includes(this.state.busqueda) ||
                 item.Valorventa.toString().includes(this.state.busqueda) ||
-                item.CantIdDocumento.toString().includes(this.state.busqueda)
-            ) {
+                item.CantIdDocumento.toString().includes(this.state.busqueda) ||
+                item.Fecha.toString().includes(this.state.busqueda)
+            ) { 
                 return item;
             }
         });
@@ -308,7 +311,7 @@ class VistaPlano extends Component {
                         <div className="card-header bg-warning">
                             <h3 className="card-title"><b>Vista Plano Cartera</b></h3>
                         </div>
-                        <div style={{ "border-radius": "5px", 'margin': '5px', ' background-color': '#212121' }}>
+                        <div  style={{"border-radius": "5px", ' background-color': '#262625' }}>
                             <div className="table-responsive">
                                 <div className="barraBusqueda">
                                     <Input2
@@ -321,13 +324,13 @@ class VistaPlano extends Component {
                                     />
                                 </div>
                                 <DataTable
-                                    striped
                                     bordered
                                     editabled
                                     hover
                                     columns={this.state.columnas}
                                     responsive
                                     data={this.state.planos}
+                                    theme='custom-theme'
                                     pagination
                                     paginationComponentOptions={paginacionOpciones}
                                     fixedHeader

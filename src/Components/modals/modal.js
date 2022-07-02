@@ -41,6 +41,9 @@ const Modal = () => {
                 FechaZeta,
                 Fecha,
                 Hora,
+                Rom,
+                Kilometraje,
+                Cuenta
             }),
         });
         const data = await res.json();
@@ -151,7 +154,7 @@ const Modal = () => {
                             </div>
                             <div className="col-sm-6">
                                 <ol className="breadcrumb float-md-right">
-                                    <Nav.Link className="breadcrumb-item" href="/Cartera">Cerrar</Nav.Link>
+                                    <Nav.Link className="breadcrumb-item" href="/DatosCartera">Cerrar</Nav.Link>
                                 </ol>
                             </div>
                         </div>
@@ -461,7 +464,7 @@ const Modal = () => {
                                                             name="FechaZeta"
                                                             type="text"
                                                             label="FechaZeta"
-                                                            placeholder="07-06-2022"
+                                                            placeholder="2022-03-15"
                                                             id="FechaZeta"
                                                             value={FechaZeta2}
                                                             onChange={(e) => SetFechaZeta(e.target.value)}
@@ -477,7 +480,7 @@ const Modal = () => {
                                                             name="Fecha"
                                                             type="text"
                                                             label="Fecha"
-                                                            placeholder="07-06-2022"
+                                                            placeholder="2022-03-15"
                                                             id="Fecha"
                                                             value={Fecha2}
                                                             onChange={(e) => SetFecha(e.target.value)}
@@ -493,7 +496,7 @@ const Modal = () => {
                                                             name="Hora"
                                                             type="text"
                                                             label="Hora"
-                                                            placeholder="07-06-2022 12:00:00"
+                                                            placeholder="12:00:00"
                                                             id="Hora"
                                                             value={Hora2}
                                                             onChange={(e) => SetHora(e.target.value)}
