@@ -5,7 +5,12 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import 'styled-components'
 import './Cartera.css';
-import {FilterComponent} from './Filter';
+import { Input2 } from '../../Components/Inputs/styles';
+import Inpunt from '../../Components/Inputs/Input';
+import {
+    Button,
+} from 'react-bootstrap';
+import { FilterComponent } from './Filter';
 
 
 const paginacionOpciones = {
@@ -14,6 +19,7 @@ const paginacionOpciones = {
     selectAllRowsItem: true,
     selectAllRowsItemText: 'Todos',
 }
+
 
 const Compoentedata = () => {
 
@@ -25,39 +31,120 @@ const Compoentedata = () => {
         const response = await fetch(URL)
         const data = await response.json()
         setData(data)
+        setTablaUsuarios(data)
     }
     useEffect(() => {
         showData()
     }, [])
 
-    const [filterText, setFilterText] = React.useState('');
-    const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
-    const filteredItems = cartera.filter(
-        item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
-    );
+
+
+
+    const [tablaUsuarios, setTablaUsuarios] = useState([]);
+    const [tablaUsuarios2, setTablaUsuarios2] = useState([]);
+    const [tablaUsuarios3, setTablaUsuarios3] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
+    const [busqueda2, setBusqueda2] = useState("");
+    const [busqueda3, setBusqueda3] = useState("");
+
+
+    const handleChange = e => {
+        setBusqueda(e.target.value)
+        filtrar(e.target.value);
+    }
+
+    const handleChange2 = e => {
+        setBusqueda2(e.target.value)
+        filtrar2(e.target.value);
+    }
+
+    const handleChange3 = e => {
+        setBusqueda3(e.target.value)
+        filtrar3(e.target.value);
+    }
+
+
+    const filtrar = (terminoBusqueda) => {
+        var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+            if (elemento.IdSede.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda);
+        setTablaUsuarios2(resultadosBusqueda);
+    }
+
+    const filtrar2 = (terminoBusqueda) => {
+        var resultadosBusqueda2 = tablaUsuarios2.filter((elemento) => {
+            if (elemento.FechaZeta.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.Hora.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda2);
+        setTablaUsuarios3(resultadosBusqueda2);
+    }
+
+    const filtrar3 = (terminoBusqueda) => {
+        var resultadosBusqueda3 = tablaUsuarios3.filter((elemento) => {
+            if (elemento.IdentificacionCliente.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.NombreCliente.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.IdDocumento.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.Cuenta.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda3);
+    }
+
+    const[TotalVolumen, setTotalVolumen] = useState(0);
+    const[TotalValor, setTotalValor] = useState(0);
+    
+    const sumar = () => {
+        var suma = 0;
+        var suma2 = 0;
+        for (var i = 0; i < cartera.length; i++) {
+            suma += cartera[i].VolumenVenta;
+            suma2 += cartera[i].ValorVenta;
+        }
+        setTotalVolumen(suma);
+        setTotalValor(suma2);
+    }  
+    useEffect(() => {
+        sumar()
+    })
+
 
     const columns = [{
         name: 'Sede',
         selector: row => row.IdSede,
         sortable: true,
+        maxWidth : '3%',
     },
     {
         name: 'Turno',
         selector: row => row.IdTurno,
         sortable: true,
+        align: 'center', 
+        maxWidth : '3%',
     },
     {
         name: 'Isla',
         selector: row => row.CodigoIsla,
         sortable: true,
+        maxWidth : '3%',
     },
     {
         name: 'Vendedor',
         selector: row => row.NombreVendedor,
         sortable: true,
+        grow : '4',
     },
     {
-        name: 'Identificacion Cliente',
+        name: 'Iden Cliente',
         selector: row => row.IdentificacionCliente,
         sortable: true,
     },
@@ -65,6 +152,7 @@ const Compoentedata = () => {
         name: 'Cliente',
         selector: row => row.NombreCliente,
         sortable: true,
+        grow : '5',
     },
     {
         name: 'Id Doc',
@@ -75,6 +163,8 @@ const Compoentedata = () => {
         name: 'Articulo',
         selector: row => row.Articulo,
         sortable: true,
+        align: 'center', 
+        grow : '4',
     },
     {
         name: 'Volumen',
@@ -100,6 +190,7 @@ const Compoentedata = () => {
         name: 'Forma Pago',
         selector: row => row.FormasPago,
         sortable: true,
+        grow : '3',
     },
     {
         name: 'Cara',
@@ -137,7 +228,7 @@ const Compoentedata = () => {
         sortable: true,
     },
     {
-        name: 'Kilometraje',
+        name: 'Km',
         selector: row => row.Kilometraje,
         sortable: true,
     },
@@ -145,6 +236,7 @@ const Compoentedata = () => {
         name: 'Rom',
         selector: row => row.Rom,
         sortable: true,
+        grow : '5',
     },
     {
         name: 'Cuenta',
@@ -179,19 +271,60 @@ const Compoentedata = () => {
     }, 'dark');
 
     const subHeaderComponentMemo = React.useMemo(() => {
-        const handleClear = () => {
-            if (filterText) {
-                setResetPaginationToggle(!resetPaginationToggle);
-                setFilterText('');
-            }
-        };
 
         return (
-            <FilterComponent onFilter={e => setFilterText(e.target.value)}  onClear={handleClear} filterText={filterText} />
+            <div style={{ width: '100%' } }>
+            <Input2
+                type="text"
+                placeholder="Buscar Id Sede"
+                className="textField"
+                name="busqueda"
+                value={busqueda}
+                onChange={handleChange} />
+                <Input2
+                type="text"
+                placeholder="Buscar Fecha"
+                className="textField"
+                name="busqueda2"
+                value={busqueda2}
+                onChange={handleChange2} />
+                <Input2
+                type="text"
+                placeholder="Buscar"
+                className="textField"
+                name="busqueda3"
+                value={busqueda3}
+                onChange={handleChange3} />
+               </div>
         );
-    }, [filterText, resetPaginationToggle]);
+    }, [busqueda, handleChange, busqueda2, busqueda3,handleChange2,handleChange3]);
 
     return (
+        <div>
+        <div className="row">
+        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+            text={'white'}
+            className="card">
+            <div classname="card head"><b>Transacciones Totales:</b></div>
+            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{cartera.length}</div>
+        </div>
+        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+            text={'white'}
+            className="card">
+            <div classname="card head"> <b>Total Volumen Ventas: </b></div>
+            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalVolumen}</div>
+        </div>
+        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+            text={'white'}
+            className="card">
+            <div classname="card head"><b>Total Valor de Ventas:</b></div>
+            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalValor}</div>
+        </div>
+    </div>
+                 <div style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
+                 <div className="card-header bg-warning">
+                     <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
+                 </div>
         <DataTable
             bordered
             hover
@@ -200,14 +333,15 @@ const Compoentedata = () => {
             data={cartera}
             pagination
             responsive={true}
-            paginationResetDefaultPage={resetPaginationToggle}
             paginationComponentOptions={paginacionOpciones}
-            noDataComponent={<span>No se encontró ningún elemento</span>} 
+            noDataComponent={<span>No se encontró ningún elemento</span>}
             subHeader
             subHeaderComponent={subHeaderComponentMemo}
             selectableRows
             persistTableHead
         />
+        </div>
+        </div>
     );
 }
 

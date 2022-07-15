@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import DataTable, { createTheme } from 'react-data-table-component';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import 'styled-components'
 import './Cartera.css';
 import Compoentedata from './Data';
-//import Example from './DatePiker';
+import Inpunt from '../../Components/Inputs/Input';
+import { Input2 } from '../../Components/Inputs/styles';
 import {
-    Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form,
+    Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form, Modal
 } from 'react-bootstrap';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import es from 'date-fns/locale/es';
+registerLocale("es", es);
 
 //,[IdTurno]
 //,[CodigoIsla]
@@ -47,38 +53,264 @@ import {
 
 
 const Cartera4 = () => {
+
+    const [tablaUsuarios, setTablaUsuarios] = useState([]);
+    const [tablaUsuarios2, setTablaUsuarios2] = useState([]);
+    const [tablaUsuarios3, setTablaUsuarios3] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
+    const [busqueda2, setBusqueda2] = useState("");
+    const [date, setDate] = useState(new Date());
+
+
+    const handleChange = e => {
+        setBusqueda(e.target.value)
+        filtrar(e.target.value);
+    }
+
+    const handleChange2 = e => {
+        setBusqueda2(e.target.value)
+        filtrar2(e.target.value);
+    }
+
+
+    const filtrar = (terminoBusqueda) => {
+        var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+            if (elemento.FechaZeta.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda);
+        setTablaUsuarios2(resultadosBusqueda);
+    }
+
+    const filtrar2 = (terminoBusqueda) => {
+        var resultadosBusqueda2 = tablaUsuarios2.filter((elemento) => {
+            if (elemento.Fecha.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.FechaZeta.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.Hora.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda2);
+        setTablaUsuarios3(resultadosBusqueda2);
+    }
+
+
     const [cartera, setData] = useState([]);
     const URL = 'http://192.168.0.19:3001/api/cartera'
-
-
     const showData = async () => {
         const response = await fetch(URL)
         const data = await response.json()
         setData(data)
+        setTablaUsuarios(data)
     }
     useEffect(() => {
         showData()
     }, [])
 
-    const [cartera2, setData2] = useState([]);
-    const URL2 = 'http://192.168.0.19:3001/api/sum'
-    const showData2 = async () => {
-        const response = await fetch(URL2)
-        const data2 = await response.json()
-        setData2(data2)
-        console.log(data2[0].Cantidad)
-        console.log(data2[0].TotalVolumen)
-        console.log(data2[0].TotalVenta)
-    }
-    useEffect(() => {
-        showData2()
-    }, [])
+
 
     const [disable, setDisable] = React.useState(false);
+    const [SetFechaZeta] = useState("")
+    const [FechaZeta2, cambiarFechaZeta] = useState({ campo: '' });
+    const FechaZeta = FechaZeta2.campo
+    const [SetFechaZeta2] = useState("")
+    const [FechaZeta3, cambiarFechaZeta2] = useState({ campo: '' });
+    const FechaZeta4 = FechaZeta3.campo
 
-    let toast1 = cartera2[0].Cantidad
-    let toast2 = cartera2[0].TotalVolumen
-    let toast3 = cartera2[0].TotalVenta
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [TotalVolumen, setTotalVolumen] = useState(0);
+    const [TotalValor, setTotalValor] = useState(0);
+
+    const sumar = () => {
+        var suma = 0;
+        var suma2 = 0;
+        for (var i = 0; i < cartera.length; i++) {
+            suma += cartera[i].VolumenVenta;
+            suma2 += cartera[i].ValorVenta;
+        }
+        let totalVolumen = suma;
+        let totalValor = suma2;
+        setTotalVolumen(totalVolumen);
+        setTotalValor(totalValor);
+    }
+    useEffect(() => {
+        sumar()
+    })
+
+
+    const columns = [{
+        name: 'Sede',
+        selector: row => row.IdSede,
+        sortable: true,
+    },
+    {
+        name: 'Turno',
+        selector: row => row.IdTurno,
+        sortable: true,
+    },
+    {
+        name: 'Isla',
+        selector: row => row.CodigoIsla,
+        sortable: true,
+    },
+    {
+        name: 'Vendedor',
+        selector: row => row.NombreVendedor,
+        sortable: true,
+    },
+    {
+        name: 'Identificacion Cliente',
+        selector: row => row.IdentificacionCliente,
+        sortable: true,
+    },
+    {
+        name: 'Cliente',
+        selector: row => row.NombreCliente,
+        sortable: true,
+    },
+    {
+        name: 'Id Doc',
+        selector: row => row.IdDocumento,
+        sortable: true,
+    },
+    {
+        name: 'Articulo',
+        selector: row => row.Articulo,
+        sortable: true,
+    },
+    {
+        name: 'Volumen',
+        selector: row => row.VolumenVenta,
+        sortable: true,
+    },
+    {
+        name: 'PPU',
+        selector: row => row.ValorUnitario,
+        sortable: true,
+    },
+    {
+        name: 'Valor Venta',
+        selector: row => row.ValorVenta,
+        sortable: true,
+    },
+    {
+        name: 'Placa',
+        selector: row => row.Placa,
+        sortable: true,
+    },
+    {
+        name: 'Forma Pago',
+        selector: row => row.FormasPago,
+        sortable: true,
+    },
+    {
+        name: 'Cara',
+        selector: row => row.CodigoCara,
+        sortable: true,
+    },
+    {
+        name: 'Mangueral',
+        selector: row => row.CodigoManguera,
+        sortable: true,
+    },
+    {
+        name: 'Pre Factura',
+        selector: row => row.PrefijoFactura,
+        sortable: true,
+    },
+    {
+        name: 'NumFactura',
+        selector: row => row.NumeroFactura,
+        sortable: true,
+    },
+    {
+        name: 'Fecha Zeta',
+        selector: row => row.FechaZeta,
+        sortable: true,
+    },
+    {
+        name: 'Fecha',
+        selector: row => row.Fecha,
+        sortable: true,
+    },
+    {
+        name: 'Hora',
+        selector: row => row.Hora,
+        sortable: true,
+    },
+    {
+        name: 'Kilometraje',
+        selector: row => row.Kilometraje,
+        sortable: true,
+    },
+    {
+        name: 'Rom',
+        selector: row => row.Rom,
+        sortable: true,
+    },
+    {
+        name: 'Cuenta',
+        selector: row => row.Cuenta,
+        sortable: true,
+    },
+
+    ]
+
+
+    createTheme('custom-theme', {
+        text: {
+            primary: '#FFFFFF',
+            secondary: '#f8a51e',
+        },
+        background: {
+            default: '#262625',
+            secondary: '#262625',
+        },
+        context: {
+            background: '#262625',
+            text: '#f8a51e',
+        },
+        divider: {
+            default: '#262625',
+        },
+        action: {
+            button: 'rgba(0,0,0,.54)',
+            hover: 'rgba(0,0,0,.08)',
+            disabled: 'rgba(0,0,0,.12)',
+        },
+    }, 'dark');
+
+    const handleCalendarClose = () => console.log("Calendar closed");
+    const handleCalendarOpen = () => console.log("Calendar opened");
+
+    const subHeaderComponentMemo = React.useMemo(() => {
+
+        return (
+            <div style={{ width: '100%' }}>
+                <Input2
+                    type="text"
+                    placeholder="Buscar Fecha Inicio"
+                    className="textField"
+                    name="busqueda"
+                    value={busqueda}
+                    onChange={handleChange} />
+                <Input2
+                    type="text"
+                    placeholder="Buscar Fecha Fin"
+                    className="textField"
+                    name="busqueda"
+                    value={busqueda2}
+                    onChange={handleChange2} />
+            </div>
+        );
+    }, [busqueda, handleChange, busqueda2, handleChange2]);
 
     return (
         <div>
@@ -96,6 +328,7 @@ const Cartera4 = () => {
 
                 <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+                <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
                 <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
                 <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
                 <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
@@ -105,7 +338,7 @@ const Cartera4 = () => {
                 {['sm'].map((expand) => (
                     <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
                         <Container fluid>
-                            <Navbar.Brand href="#"><i class="icon fa fa-eye"></i>&ensp;<b>Aplicativo Rivera</b></Navbar.Brand>
+                            <Navbar.Brand href="#"><i class="fa-solid fa-gas-pump"></i>&ensp;<b>Aplicativo Rivera</b></Navbar.Brand>
                             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                             <Navbar.Offcanvas
                                 id={`offcanvasNavbar-expand-${expand}`}
@@ -124,7 +357,9 @@ const Cartera4 = () => {
                                             title="Cartera"
                                             id={`offcanvasNavbarDropdown-expand-${expand}`}>
                                             <li>
-                                                <NavDropdown.Item href="/Cartera" >Cartera</NavDropdown.Item>
+                                                <NavDropdown.Item active href="/DatosCartera">
+                                                    Cartera
+                                                </NavDropdown.Item>
                                             </li>
                                             <li>
                                                 <NavDropdown.Item href="/Tabla">
@@ -136,38 +371,9 @@ const Cartera4 = () => {
                                                     Vista Plano
                                                 </NavDropdown.Item>
                                             </li>
-                                            <li>
-                                                <NavDropdown.Item active href="/DatosCartera">
-                                                    Prueba Datos
-                                                </NavDropdown.Item>
-                                            </li>
                                         </NavDropdown>
                                         <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                                         <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
-                                    </Nav>
-                                    <Nav
-                                        class=" dropdown-toggle d-flex align-items-center hidden-arrow"
-                                        href="#"
-                                        id="navbarDropdownMenuLink"
-                                        role="button"
-                                        data-mdb-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        <i class="fas fa-bell"></i>
-                                        <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                                        <NavDropdown
-                                            class="dropdown-menu dropdown-menu-end"
-                                            aria-labelledby="navbarDropdownMenuAvatar">
-                                            <li>
-                                                <NavDropdown.Item class="dropdown-item" href="#">Notificaciones</NavDropdown.Item>
-                                            </li>
-                                            <li>
-                                                <NavDropdown.Item class="dropdown-item" href="#">Actualizaciones</NavDropdown.Item>
-                                            </li>
-                                            <li>
-                                                <NavDropdown.Item class="dropdown-item" href="#">Sobre</NavDropdown.Item>
-                                            </li>
-                                        </NavDropdown>
                                     </Nav>
                                     <Nav
                                         class="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -188,12 +394,6 @@ const Cartera4 = () => {
                                     <NavDropdown
                                         class="dropdown-menu dropdown-menu-end"
                                         aria-labelledby="navbarDropdownMenuAvatar">
-                                        <li>
-                                            <NavDropdown.Item class="dropdown-item" href="#">Perfil</NavDropdown.Item>
-                                        </li>
-                                        <li>
-                                            <NavDropdown.Item class="dropdown-item" href="#">Configuracion</NavDropdown.Item>
-                                        </li>
                                         <li>
                                             <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
                                         </li>
@@ -228,40 +428,64 @@ const Cartera4 = () => {
                         </div>
                     </div>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} href={"/Registro_Cartera"} >Agregar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href={"/Actualizar"} >Actualizar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} href={"/Actualizar"} >Actualizar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={handleShow} >Filtrar</Button>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }}  onClick={() => setDisable(false)}>Cancelar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
                 </section>
-                <div className="row">
-                <div bg={'dark'} style={{ width: '250px', height: '60px' , margin: '25px' , color: '#f8a51e', backgroundColor: '#171616'}}
-                        text={'white'}
-                        className="card">
-                        <div classname="card head"><b>Transacciones Totales:</b></div>
-                        <div className="card body"style={{ color: '#ffffff', backgroundColor: '#171616'}}>{toast1}</div>
-                    </div>
-                    <div bg={'dark'} style={{ width: '250px', height: '60px' , margin: '25px' , color: '#f8a51e', backgroundColor: '#171616'}}
-                        text={'white'}
-                        className="card">
-                        <div classname="card head"> <b>Total Volumen Ventas: </b></div>
-                        <div className="card body"style={{ color: '#ffffff', backgroundColor: '#171616'}}>{toast2}</div>
-                    </div>
-                    <div bg={'dark'} style={{ width: '250px', height: '60px' , margin: '25px' , color: '#f8a51e', backgroundColor: '#171616'}}
-                        text={'white'}
-                        className="card">
-                        <div classname="card head"><b>Total Valor de Ventas:</b></div>
-                        <div className="card body"style={{ color: '#ffffff', backgroundColor: '#171616'}}>{toast3}</div>
-                    </div>
-                </div>
-                <div style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
-                    <div className="card-header bg-warning">
-                        <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
-                    </div>
-                    <div style={{ 'border-radiusr': '5px', ' background-color': '#212121', 'margin-right': '8px' }}>
-                    <Compoentedata />
-                    </div>
-                </div>
+                <Compoentedata />
             </div>
-        </div>
+
+            <Modal show={show} onHide={handleClose} animation={false} fullscreen={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Filtrados</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="row">
+                        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                            text={'white'}
+                            className="card">
+                            <div classname="card head"><b>Transacciones Subtotales:</b></div>
+                            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{cartera.length}</div>
+                        </div>
+                        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                            text={'white'}
+                            className="card">
+                            <div classname="card head"> <b>Subtotal Volumen Ventas: </b></div>
+                            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalVolumen}</div>
+                        </div>
+                        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                            text={'white'}
+                            className="card">
+                            <div classname="card head"><b>Subtotal Valor de Ventas:</b></div>
+                            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalValor}</div>
+                        </div>
+                    </div>
+                    <DataTable
+                        bordered
+                        hover
+                        columns={columns}
+                        theme="custom-theme"
+                        data={cartera}
+                        pagination
+                        responsive={true}
+                        noDataComponent={<span>No se encontró ningún elemento</span>}
+                        subHeader
+                        subHeaderComponent={subHeaderComponentMemo}
+                        selectableRows
+                        persistTableHead
+                    />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="warning" style={{ color: 'black' }} onClick={handleClose}>
+                        Cerrar
+                    </Button>
+                    <Button variant="warning" style={{ color: 'black' }} onClick={handleClose}>
+                        Guardar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div >
     );
 }
 

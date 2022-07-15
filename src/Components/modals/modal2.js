@@ -20,7 +20,6 @@ const Modal2 = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                IdentificacionMaster,
                 TerceroMaster,
                 Identificacion,
                 Nombre,
@@ -36,8 +35,6 @@ const Modal2 = () => {
     }
 
     //Values of the form to be sent to the API
-    const [IdentificacionMaster2, cambiarIdentificacionMaster] = useState({ campo: '' });
-    const IdentificacionMaster = IdentificacionMaster2.campo
     const [SetIdentificacionMaster] = useState("")
     const [TerceroMaster2, cambiarTerceroMaster] = useState({ campo: '' });
     const  TerceroMaster =  TerceroMaster2.campo
@@ -101,22 +98,6 @@ const Modal2 = () => {
                                         <form onSubmit={handleSubmit}>
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <div className="form-group" >
-                                                        <Inpunt
-                                                            required
-                                                            estado={IdentificacionMaster2}
-                                                            cambiarEstado={cambiarIdentificacionMaster}
-                                                            name="IdentificacionMaster"
-                                                            type="text"
-                                                            label="Identificacion Master"
-                                                            placeholder="Escribe..."
-                                                            id="IdentificacionMaster"
-                                                            value={IdentificacionMaster2}
-                                                            onChange={(e) => SetIdentificacionMaster(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
                                                             required
@@ -166,7 +147,7 @@ const Modal2 = () => {
                                                 </div>
                                             </div>
                                             <div className="col-sm-12">
-                                                <Button variant='warning' style={{ 'color': 'black' }} type="submit" ><b>Agregar</b></Button>
+                                                <Button variant='warning' style={{ 'color': 'black' }} type="submit" ><b>Relacionar</b></Button>
                                             </div>
                                         </form></div>
                                 </div>

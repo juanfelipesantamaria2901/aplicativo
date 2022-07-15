@@ -1,142 +1,165 @@
 import React from "react";
-import { useState , useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import {
-    Button, Nav, 
+    Button, Nav,
 } from 'react-bootstrap';
 import Inpunt from '../../Components/Inputs/Input';
 import { Select, Label } from '../../Components/Inputs/styles';
 
 const Actualizar = () => {
 
-    const [cartera3, setData3] = useState([]);
 
-    const URL = 'http://192.168.0.19:3001/api/cartera/'`${ IdDocumento}`
-  
-    const showData3 = async () => {
-  
-      const response = await fetch(URL)
-  
-      const data3 = await response.json()
-  
-      setData3(data3)
-  
+
+
+
+    //Mehotd for sent data to API
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`http://192.168.0.19:3001/api/products/${IdDocumento}&${IdSede}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                IdTurno,
+                CodigoIsla,
+                Vendedor,
+                IdentificacionCliente,
+                NombreCliente,
+                Articulo,
+                VolumenVenta,
+                ValorUnitario,
+                ValorVenta,
+                Placa,
+                FormasPago,
+                CodigoCara,
+                CodigoManguera,
+                PrefijoFactura,
+                NumeroFactura,
+                FechaZeta,
+                Fecha,
+                Hora,
+                Rom,
+                Kilometraje,
+                Cuenta
+            }),
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data != null) {
+            window.alert("¡Informacion Guardada exitosamente!");
+        } else {
+            window.alert("¡Error al guardar la informacion!");
+        }
+    }
+
+const [Data, setData] = useState([]);
+
+    const handleSubmit2 = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`http://192.168.0.19:3001/api/products/${IdDocumento3}&${IdSede3}`, {
+            method: "GET"
+        });
+        const data = await res.json();
+            setData(data);
+            IdTurno2.campo = data.IdTurno;
+            CodigoIsla2.campo = data.CodigoIsla;
+            Vendedor2.campo = data.NombreVendedor;
+            IdentificacionCliente2.campo = data.IdentificacionCliente;
+            NombreCliente2.campo = data.NombreCliente;
+            Articulo2.campo = data.Articulo;
+            VolumenVenta2.campo = data.VolumenVenta;
+            ValorUnitario2.campo = data.ValorUnitario;
+            ValorVenta2.campo = data.ValorVenta;
+            Placa2.campo = data.Placa;
+            CodigoCara2.campo = data.CodigoCara;
+            CodigoManguera2.campo = data.CodigoManguera;
+            PrefijoFactura2.campo = data.PrefijoFactura;
+            NumeroFactura2.campo = data.NumeroFactura;
+            FechaZeta2.campo = data.FechaZeta;
+            Fecha2.campo = data.Fecha;
+            Hora2.campo = data.Hora;
+            Rom2.campo = data.Rom;
+            Kilometraje2.campo = data.Kilometraje;
+            Cuenta2.campo = data.CuentaMaster;
+        console.log(data);
     }
     useEffect(() => {
-      showData3()
+        handleSubmit2();
     }
-      , [])
+    , [])
 
- //Mehotd for sent data to API
- const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await fetch(`http://192.168.0.19:3001/api/Cartera`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            IdSede,
-            IdTurno,
-            CodigoIsla,
-            Vendedor,
-            IdentificacionCliente,
-            NombreCliente,
-            IdDocumento,
-            Articulo,
-            VolumenVenta,
-            ValorUnitario,
-            ValorVenta,
-            Placa,
-            FormasPago,
-            CodigoCara,
-            CodigoManguera,
-            PrefijoFactura,
-            NumeroFactura,
-            FechaZeta,
-            Fecha,
-            Hora,
-            Rom,
-            Kilometraje,
-            Cuenta
-        }),
-    });
-    const data = await res.json();
-    console.log(data);
-    if (data != null) {
-        window.alert("¡Informacion Guardada exitosamente!");
-    }else{
-        window.alert("¡Error al guardar la informacion!");
-    }
-}
+    //Values of the form to be sent to the API
+    const [IdSede2, cambiarIdSede] = useState({ campo: '' });
+    const IdSede = IdSede2.campo
+    const [SetIdSede] = useState("")
+    const [IdTurno2, cambiarIdTurno] = useState({ campo: '' });
+    const IdTurno = IdTurno2.campo
+    const [SetIdTurno] = useState("")
+    const [CodigoIsla2, cambiarCodigoIsla] = useState({ campo: '' });
+    const CodigoIsla = CodigoIsla2.campo
+    const [SetCodigoIsla] = useState("")
+    const [Vendedor2, cambiarVendedor] = useState({ campo: '' });
+    const Vendedor = Vendedor2.campo
+    const [SetVendedor] = useState("")
+    const [IdentificacionCliente2, cambiarIdentificacionCliente] = useState({ campo: '' });
+    const IdentificacionCliente = IdentificacionCliente2.campo
+    const [SetIdentificacionCliente] = useState("")
+    const [NombreCliente2, cambiarNombreCliente] = useState({ campo: '' });
+    const NombreCliente = NombreCliente2.campo
+    const [SetNombreCliente] = useState("")
+    const [IdDocumento2, cambiarIdDocumento] = useState({ campo: '' });
+    const IdDocumento = IdDocumento2.campo
+    const [SetIdDocumento] = useState("")
+    const [Articulo2, cambiarArticulo] = useState({ campo: '' });
+    const Articulo = Articulo2.campo
+    const [SetArticulo] = useState("")
+    const [VolumenVenta2, cambiarVolumenVenta] = useState({ campo: '' });
+    const VolumenVenta = VolumenVenta2.campo
+    const [SetVolumenVenta] = useState("")
+    const [ValorUnitario2, cambiarValorUnitario] = useState({ campo: '' });
+    const ValorUnitario = ValorUnitario2.campo
+    const [SetValorUnitario] = useState("")
+    const [ValorVenta2, cambiarValorVenta] = useState({ campo: '' });
+    const ValorVenta = ValorVenta2.campo
+    const [SetValorVenta] = useState("")
+    const [Placa2, cambiarPlaca] = useState({ campo: '' });
+    const Placa = Placa2.campo
+    const [SetPlaca] = useState("")
+    const [FormasPago, cambiarFormasPago] = useState("")
+    const [CodigoCara2, cambiarCodigoCara] = useState({ campo: '' });
+    const CodigoCara = CodigoCara2.campo
+    const [SetCodigoCara] = useState("")
+    const [CodigoManguera2, cambiarCodigoManguera] = useState({ campo: '' });
+    const CodigoManguera = CodigoManguera2.campo
+    const [SetCodigoManguera] = useState("")
+    const [PrefijoFactura2, cambiarPrefijoFactura] = useState({campo: '' });
+    const PrefijoFactura = PrefijoFactura2.campo
+    const [SetPrefijoFactura] = useState("")
+    const [NumeroFactura2, cambiarNumeroFactura] = useState({ campo: '' });
+    const NumeroFactura = NumeroFactura2.campo
+    const [SetNumeroFactura] = useState("")
+    const [FechaZeta2, cambiarFechaZeta] = useState({ campo: '' });
+    const FechaZeta = FechaZeta2.campo
+    const [SetFechaZeta] = useState("")
+    const [Fecha2, cambiarFecha] = useState({ campo: '' });
+    const Fecha = Fecha2.campo
+    const [SetFecha] = useState("")
+    const [Hora2, cambiarHora] = useState({ campo: '' });
+    const Hora = Hora2.campo
+    const [SetHora] = useState("")
+    const [Rom2, cambiarRom] = useState({ campo: '' });
+    const Rom = Rom2.campo
+    const [SetRom] = useState("")
+    const [Kilometraje2, cambiarKilometraje] = useState({ campo: '' });
+    const Kilometraje = Kilometraje2.campo
+    const [SetKilometraje] = useState("")
+    const [Cuenta2, cambiarCuenta] = useState({ campo: '' });
+    const Cuenta = Cuenta2.campo
+    const [SetCuenta] = useState("");
+    const IdSede3 = IdSede2.campo;
+    const IdDocumento3 = IdDocumento2.campo; 
 
-//Values of the form to be sent to the API
-const [IdSede2, cambiarIdSede] = useState({ campo: '' });
-const IdSede = IdSede2.campo
-const [SetIdSede] = useState("")
-const [IdTurno2, cambiarIdTurno] = useState({ campo: '' });
-const IdTurno = IdTurno2.campo
-const [SetIdTurno] = useState("")
-const [CodigoIsla2, cambiarCodigoIsla] = useState({ campo: '' });
-const CodigoIsla = CodigoIsla2.campo
-const [SetCodigoIsla] = useState("")
-const [Vendedor2, cambiarVendedor] = useState({ campo: '' });
-const Vendedor = Vendedor2.campo
-const [SetVendedor] = useState("")
-const [IdentificacionCliente2, cambiarIdentificacionCliente] = useState({ campo: '' });
-const IdentificacionCliente = IdentificacionCliente2.campo
-const [SetIdentificacionCliente] = useState("")
-const [NombreCliente2, cambiarNombreCliente] = useState({ campo: '' });
-const NombreCliente = NombreCliente2.campo
-const [SetNombreCliente] = useState("")
-const [IdDocumento2, cambiarIdDocumento] = useState({ campo: '' });
-const IdDocumento = IdDocumento2.campo
-const [SetIdDocumento] = useState("")
-const [Articulo2, cambiarArticulo] = useState({ campo: '' });
-const Articulo = Articulo2.campo
-const [SetArticulo] = useState("")
-const [VolumenVenta2, cambiarVolumenVenta] = useState({ campo: '' });
-const VolumenVenta = VolumenVenta2.campo
-const [SetVolumenVenta] = useState("")
-const [ValorUnitario2, cambiarValorUnitario] = useState({ campo: '' });
-const ValorUnitario = ValorUnitario2.campo
-const [SetValorUnitario] = useState("")
-const [ValorVenta2, cambiarValorVenta] = useState({ campo: '' });
-const ValorVenta = ValorVenta2.campo
-const [SetValorVenta] = useState("")
-const [Placa2, cambiarPlaca] = useState({ campo: '' });
-const Placa = Placa2.campo
-const [SetPlaca] = useState("")
-const [FormasPago, cambiarFormasPago] = useState("")
-const [CodigoCara2, cambiarCodigoCara] = useState({ campo: '' });
-const CodigoCara = CodigoCara2.campo
-const [SetCodigoCara] = useState("")
-const [CodigoManguera2, cambiarCodigoManguera] = useState({ campo: '' });
-const CodigoManguera = CodigoManguera2.campo
-const [SetCodigoManguera] = useState("")
-const [PrefijoFactura2, cambiarPrefijoFactura] = useState({ campo: '' });
-const PrefijoFactura = PrefijoFactura2.campo
-const [SetPrefijoFactura] = useState("")
-const [NumeroFactura2, cambiarNumeroFactura] = useState({ campo: '' });
-const NumeroFactura = NumeroFactura2.campo
-const [SetNumeroFactura] = useState("")
-const [FechaZeta2, cambiarFechaZeta] = useState({ campo: '' });
-const FechaZeta = FechaZeta2.campo
-const [SetFechaZeta] = useState("")
-const [Fecha2, cambiarFecha] = useState({ campo: '' });
-const Fecha = Fecha2.campo
-const [SetFecha] = useState("")
-const [Hora2, cambiarHora] = useState({ campo: '' });
-const Hora = Hora2.campo
-const [SetHora] = useState("")
-const [Rom2, cambiarRom] = useState({ campo: '' });
-const Rom = Rom2.campo
-const [SetRom] = useState("")
-const [Kilometraje2, cambiarKilometraje] = useState({ campo: '' });
-const Kilometraje = Kilometraje2.campo
-const [SetKilometraje] = useState("")
-const [Cuenta2, cambiarCuenta] = useState({ campo: '' });
-const Cuenta = Cuenta2.campo
-const [SetCuenta] = useState("")
 
     return (
         <div className='content'>
@@ -163,7 +186,7 @@ const [SetCuenta] = useState("")
                     <div className="container-fluid">
                         <div className="row mb-2">
                             <div className="col-sm-6">
-                                <h1> Registro Cartera Diario</h1>
+                                <h1>Actualizar Cartera Diario</h1>
                             </div>
                             <div className="col-sm-6">
                                 <ol className="breadcrumb float-md-right">
@@ -182,10 +205,49 @@ const [SetCuenta] = useState("")
                                 {/* general form elements disabled */}
                                 <div className="card card-warning">
                                     <div className="card-header bg-warning">
-                                        <h3 className="card-title"><b>Registro Cartera Diario</b></h3>
+                                        <h3 className="card-title"><b>Actualizar Cartera Diario</b></h3>
                                     </div>
                                     {/* /.card-header */}
                                     <div className="card-body ">
+                                        <form onSubmit={handleSubmit2}>
+                                        <div className="row">
+                                                <div className="col-sm-3">
+                                                    <div className="form-group">
+                                                        <Inpunt
+                                                            required
+                                                            estado={IdDocumento2}
+                                                            cambiarEstado={cambiarIdDocumento}
+                                                            name="IdDocumento"
+                                                            type="text"
+                                                            label="IdDocumento"
+                                                            placeholder="Escribe..."
+                                                            id="IdDocumento"
+                                                            value={IdDocumento2}
+                                                            onChange={(e) => SetIdDocumento(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-3">
+                                                    <div className="form-group" >
+                                                        <Inpunt
+                                                            required
+                                                            estado={IdSede2}
+                                                            cambiarEstado={cambiarIdSede}
+                                                            name="IdSede"
+                                                            type="text"
+                                                            label="IdSede"
+                                                            placeholder="Escribe..."
+                                                            id="IdSede"
+                                                            value={IdSede2}
+                                                            onChange={(e) => SetIdSede(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-3">
+                                                <Button variant='warning' style={{ 'color': 'black', 'margin-top':'45px', }} type="submit" ><b>Buscar</b></Button>
+                                                </div>
+                                            </div>
+                                            </form>
                                         <form onSubmit={handleSubmit}>
                                             <div className="row">
                                                 <div className="col-sm-3">
@@ -199,8 +261,24 @@ const [SetCuenta] = useState("")
                                                             label="IdSede"
                                                             placeholder="Escribe..."
                                                             id="IdSede"
-                                                            value={IdSede}      
+                                                            value={IdSede}
                                                             onChange={(e) => SetIdSede(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-3">
+                                                    <div className="form-group">
+                                                        <Inpunt
+                                                            required
+                                                            estado={IdDocumento2}
+                                                            cambiarEstado={cambiarIdDocumento}
+                                                            name="IdDocumento"
+                                                            type="text"
+                                                            label="IdDocumento"
+                                                            placeholder="Escribe..."
+                                                            id="IdDocumento"
+                                                            value={IdDocumento2}
+                                                            onChange={(e) => SetIdDocumento(e.target.value)}
                                                         />
                                                     </div>
                                                 </div>
@@ -283,22 +361,6 @@ const [SetCuenta] = useState("")
                                                             id="NombreCliente"
                                                             value={NombreCliente2}
                                                             onChange={(e) => SetNombreCliente(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-3">
-                                                    <div className="form-group">
-                                                        <Inpunt
-                                                            required
-                                                            estado={IdDocumento2}
-                                                            cambiarEstado={cambiarIdDocumento}
-                                                            name="IdDocumento"
-                                                            type="text"
-                                                            label="IdDocumento"
-                                                            placeholder="Escribe..."
-                                                            id="IdDocumento"
-                                                            value={IdDocumento2}
-                                                            onChange={(e) => SetIdDocumento(e.target.value)}
                                                         />
                                                     </div>
                                                 </div>
@@ -395,7 +457,9 @@ const [SetCuenta] = useState("")
                                                             onChange={(e) => cambiarFormasPago(e.target.value)}
                                                             required>
                                                             <option selected>Seleccione una opcion</option>
-                                                            <option value="Credito" >Credito</option>
+                                                            <option value="Credito">Credito</option>
+                                                            <option value="Credito Directo">Credito Directo</option>
+                                                            <option value="Privada master" >Privada master</option>
                                                             <option value="Efectivo" >Efectivo</option>
                                                             <option value="Otros" >Otros</option>
                                                         </Select>

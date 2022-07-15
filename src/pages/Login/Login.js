@@ -16,10 +16,8 @@ import {
    // else{
     //    window.alert("Usuario o contraseña incorrectos");
    // }  href={'/Cartera'}
-
    let USER=  process.env.APPUSER;
    let PASS=  process.env.APPPASS;
-
 class Login extends React.Component {
     
     state = {
@@ -39,16 +37,16 @@ class Login extends React.Component {
         console.log(this.state.Form);
     }
  
- inicio(){
-        if(this.state.Form.username === "Admin" && this.state.Form.password === "Admin"){
-            window.alert(`Bienvenido ${this.state.Form.username}`);
-            window.location.assign('http://127.0.0.1:3000/Cartera')
-        }else
-        {
-        window.alert("Usuario o contraseña incorrectos");
-        window.location.assign('http://127.0.0.1:3000/');
-        }
-    }
+ 
+    inicio = () => {
+     if(this.state.Form.username === 'diegovalencia@rivera.com.co' && this.state.Form.password === 'App/Rivera2022*'){
+         window.alert(`Bienvenido ${this.state.Form.username}`);
+         window.location.assign('http://192.168.154.1:3000/DatosCartera')
+     }else
+     {
+     window.alert("Usuario o contraseña incorrectos");
+     }
+ }
 
     iniciarsecion = async () => {
 //        valit();
@@ -113,7 +111,7 @@ class Login extends React.Component {
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
                                     </Form.Group>
-                                    <Button variant="warning" type="submit" onClick={()=>this.inicio()} href={'/Cartera'}  style={{'color':'black'}}>
+                                    <Button variant="warning" type="submit" onClick={()=>this.inicio()} href ={'/DatosCartera'}  style={{'color':'black'}}>
                                         Ingresar
                                     </Button>
                                 </Form>

@@ -15,7 +15,7 @@ const Modal = () => {
     //Mehotd for sent data to API
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://192.168.0.19:3001/api/Cartera`, {
+        const res = await fetch(`http://192.168.0.19:3001/api/cartera`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -57,71 +57,71 @@ const Modal = () => {
 
     //Values of the form to be sent to the API
     const [IdSede2, cambiarIdSede] = useState({ campo: '' });
-    const IdSede = IdSede2.campo
+    const IdSede = IdSede2
     const [SetIdSede] = useState("")
     const [IdTurno2, cambiarIdTurno] = useState({ campo: '' });
-    const IdTurno = IdTurno2.campo
+    const IdTurno = IdTurno2
     const [SetIdTurno] = useState("")
     const [CodigoIsla2, cambiarCodigoIsla] = useState({ campo: '' });
-    const CodigoIsla = CodigoIsla2.campo
+    const CodigoIsla = CodigoIsla2
     const [SetCodigoIsla] = useState("")
     const [Vendedor2, cambiarVendedor] = useState({ campo: '' });
-    const Vendedor = Vendedor2.campo
+    const Vendedor = Vendedor2
     const [SetVendedor] = useState("")
     const [IdentificacionCliente2, cambiarIdentificacionCliente] = useState({ campo: '' });
-    const IdentificacionCliente = IdentificacionCliente2.campo
+    const IdentificacionCliente = IdentificacionCliente2
     const [SetIdentificacionCliente] = useState("")
     const [NombreCliente2, cambiarNombreCliente] = useState({ campo: '' });
-    const NombreCliente = NombreCliente2.campo
+    const NombreCliente = NombreCliente2
     const [SetNombreCliente] = useState("")
     const [IdDocumento2, cambiarIdDocumento] = useState({ campo: '' });
-    const IdDocumento = IdDocumento2.campo
+    const IdDocumento = IdDocumento2
     const [SetIdDocumento] = useState("")
     const [Articulo2, cambiarArticulo] = useState({ campo: '' });
-    const Articulo = Articulo2.campo
+    const Articulo = Articulo2
     const [SetArticulo] = useState("")
     const [VolumenVenta2, cambiarVolumenVenta] = useState({ campo: '' });
-    const VolumenVenta = VolumenVenta2.campo
+    const VolumenVenta = VolumenVenta2
     const [SetVolumenVenta] = useState("")
     const [ValorUnitario2, cambiarValorUnitario] = useState({ campo: '' });
-    const ValorUnitario = ValorUnitario2.campo
+    const ValorUnitario = ValorUnitario2
     const [SetValorUnitario] = useState("")
     const [ValorVenta2, cambiarValorVenta] = useState({ campo: '' });
-    const ValorVenta = ValorVenta2.campo
+    const ValorVenta = ValorVenta2
     const [SetValorVenta] = useState("")
     const [Placa2, cambiarPlaca] = useState({ campo: '' });
-    const Placa = Placa2.campo
+    const Placa = Placa2
     const [SetPlaca] = useState("")
     const [FormasPago, cambiarFormasPago] = useState("")
     const [CodigoCara2, cambiarCodigoCara] = useState({ campo: '' });
-    const CodigoCara = CodigoCara2.campo
+    const CodigoCara = CodigoCara2
     const [SetCodigoCara] = useState("")
     const [CodigoManguera2, cambiarCodigoManguera] = useState({ campo: '' });
-    const CodigoManguera = CodigoManguera2.campo
+    const CodigoManguera = CodigoManguera2
     const [SetCodigoManguera] = useState("")
     const [PrefijoFactura2, cambiarPrefijoFactura] = useState({ campo: '' });
-    const PrefijoFactura = PrefijoFactura2.campo
+    const PrefijoFactura = PrefijoFactura2
     const [SetPrefijoFactura] = useState("")
     const [NumeroFactura2, cambiarNumeroFactura] = useState({ campo: '' });
-    const NumeroFactura = NumeroFactura2.campo
+    const NumeroFactura = NumeroFactura2
     const [SetNumeroFactura] = useState("")
     const [FechaZeta2, cambiarFechaZeta] = useState({ campo: '' });
-    const FechaZeta = FechaZeta2.campo
+    const FechaZeta = FechaZeta2
     const [SetFechaZeta] = useState("")
     const [Fecha2, cambiarFecha] = useState({ campo: '' });
-    const Fecha = Fecha2.campo
+    const Fecha = Fecha2
     const [SetFecha] = useState("")
     const [Hora2, cambiarHora] = useState({ campo: '' });
-    const Hora = Hora2.campo
+    const Hora = Hora2
     const [SetHora] = useState("")
     const [Rom2, cambiarRom] = useState({ campo: '' });
-    const Rom = Rom2.campo
+    const Rom = Rom2
     const [SetRom] = useState("")
     const [Kilometraje2, cambiarKilometraje] = useState({ campo: '' });
-    const Kilometraje = Kilometraje2.campo
+    const Kilometraje = Kilometraje2
     const [SetKilometraje] = useState("")
     const [Cuenta2, cambiarCuenta] = useState({ campo: '' });
-    const Cuenta = Cuenta2.campo
+    const Cuenta = Cuenta2
     const [SetCuenta] = useState("")
 
     //Render of the component
@@ -382,7 +382,9 @@ const Modal = () => {
                                                             onChange={(e) => cambiarFormasPago(e.target.value)}
                                                             required>
                                                             <option selected>Seleccione una opcion</option>
-                                                            <option value="Credito" >Credito</option>
+                                                            <option value="Credito">Credito</option>
+                                                            <option value="Credito Directo">Credito Directo</option>
+                                                            <option value="Privada master" >Privada master</option>
                                                             <option value="Efectivo" >Efectivo</option>
                                                             <option value="Otros" >Otros</option>
                                                         </Select>

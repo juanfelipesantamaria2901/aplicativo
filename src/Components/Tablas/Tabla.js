@@ -3,6 +3,7 @@ import DataTable, { createTheme } from 'react-data-table-component';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import { Input2 } from '../../Components/Inputs/styles';
 import {
   Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form, Card,
 } from 'react-bootstrap';
@@ -16,40 +17,91 @@ const paginacionOpciones = {
 
 const Tabla = () => {
 
-
   const [relacional, setData] = useState([]);
 
   const URL = 'http://192.168.0.19:3001/api/relacional'
-
   const showData = async () => {
-
     const response = await fetch(URL)
-
     const data = await response.json()
-
     setData(data)
-
+    setTablaUsuarios(data)
   }
   useEffect(() => {
     showData()
   }
     , [])
 
-  const columns = [{
-    name: 'Identificacion Master',
-    selector: row => row.IdentificacionMaster,
-  },
+    const [disable, setDisable] = React.useState(false);
+
+    const [tablaUsuarios, setTablaUsuarios] = useState([]);
+    const [tablaUsuarios2, setTablaUsuarios2] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
+    const [busqueda2, setBusqueda2] = useState("");
+    const [busqueda3, setBusqueda3] = useState("");
+
+
+    const handleChange = e => {
+        setBusqueda(e.target.value)
+        filtrar(e.target.value);
+    }
+
+    const handleChange2 = e => {
+        setBusqueda2(e.target.value)
+        filtrar2(e.target.value);
+    }
+
+    const handleChange3 = e => {
+        setBusqueda3(e.target.value)
+        filtrar3(e.target.value);
+    }
+
+    const filtrar = (terminoBusqueda) => {
+        var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+            if (elemento.TerceroMaster.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda);
+        setTablaUsuarios2(resultadosBusqueda);
+    }
+    const filtrar2 = (terminoBusqueda) => {
+        var resultadosBusqueda2 = tablaUsuarios2.filter((elemento) => {
+            if (elemento.Nombre.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda2);
+        setTablaUsuarios2(resultadosBusqueda2);
+    }
+    const filtrar3 = (terminoBusqueda) => {
+        var resultadosBusqueda = tablaUsuarios2.filter((elemento) => {
+            if ( elemento.IdentificacionCliente.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+            ) {
+                return elemento;
+            }
+        });
+        setData(resultadosBusqueda);
+        
+    }
+
+  const columns = [
+    
   {
     name: 'Tercero Master',
     selector: row => row.TerceroMaster,
+    sortable: true,
   },
   {
     name: 'Identificacion',
     selector: row => row.Identificacion,
+    sortable: true,
   },
   {
     name: 'Nombre',
     selector: row => row.Nombre,
+    sortable: true,
   },
   ]
 
@@ -74,6 +126,35 @@ const Tabla = () => {
       disabled: 'rgba(0,0,0,.12)',
     },
   }, 'dark');
+
+  const subHeaderComponentMemo = React.useMemo(() => {
+
+    return (
+        <div style={{ width: '100%' } }>
+        <Input2
+            type="text"
+            placeholder="Buscar Tercero Master"
+            className="textField"
+            name="busqueda"
+            value={busqueda}
+            onChange={handleChange} />
+            <Input2
+            type="text"
+            placeholder="Buscar Nombre"
+            className="textField"
+            name="busqueda2"
+            value={busqueda2}
+            onChange={handleChange2} />
+            <Input2
+            type="text"
+            placeholder="Buscar Identificacion"
+            className="textField"
+            name="busqueda3"
+            value={busqueda3}
+            onChange={handleChange3} />
+           </div>
+    );
+}, [busqueda, handleChange, busqueda2, busqueda3,handleChange2,handleChange3]);
 
 
   return (
@@ -102,115 +183,82 @@ const Tabla = () => {
         <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
 
         {['sm'].map((expand) => (
-          <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
-            <Container fluid>
-              <Navbar.Brand href="#"><i class="icon fa fa-eye"></i>&ensp;<b>Aplicativo Rivera</b></Navbar.Brand>
-              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-              <Navbar.Offcanvas
-                id={`offcanvasNavbar-expand-${expand}`}
-                aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                placement="end"
-              >
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                    Aplicativo Rivera
-                  </Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                  <Nav className="justify-content-end flex-grow-1 pe-3">
-                    <Nav.Link href="/Dashboard"  >Dashboard</Nav.Link>
-                    <NavDropdown
-                      title="Cartera"
-                      id={`offcanvasNavbarDropdown-expand-${expand}`}>
-                      <li>
-                        <NavDropdown.Item href="/Cartera">Cartera</NavDropdown.Item>
-                      </li>
-                      <li>
-                        <NavDropdown.Item  active href="/Tabla">
-                          Tabla Relacional
-                        </NavDropdown.Item>
-                      </li>
-                      <li>
-                        <NavDropdown.Item href="/Vista">
-                          Vista Plano
-                        </NavDropdown.Item>
-                      </li>
-                      <li>
-                        <NavDropdown.Item href="/DatosCartera">
-                          Prueba Datos
-                        </NavDropdown.Item>
-                      </li>
-                    </NavDropdown>
-                    <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
-                    <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
-                  </Nav>
-                  <Nav
-                    class=" dropdown-toggle d-flex align-items-center hidden-arrow"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-mdb-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i class="fas fa-bell"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                    <NavDropdown
-                      class="dropdown-menu dropdown-menu-end"
-                      aria-labelledby="navbarDropdownMenuAvatar">
-                      <li>
-                        <NavDropdown.Item class="dropdown-item" href="#">Notificaciones</NavDropdown.Item>
-                      </li>
-                      <li>
-                        <NavDropdown.Item class="dropdown-item" href="#">Actualizaciones</NavDropdown.Item>
-                      </li>
-                      <li>
-                        <NavDropdown.Item class="dropdown-item" href="#">Sobre</NavDropdown.Item>
-                      </li>
-                    </NavDropdown>
-                  </Nav>
-                  <Nav
-                    class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                    href="#"
-                    id="navbarDropdownMenuAvatar"
-                    role="button"
-                    data-mdb-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                      class="rounded-circle"
-                      height="25"
-                      alt="Black and White Portrait of a Man"
-                      loading="lazy"
-                    />
-                  </Nav>
-                  <NavDropdown
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuAvatar">
-                    <li>
-                      <NavDropdown.Item class="dropdown-item" href="#">Perfil</NavDropdown.Item>
-                    </li>
-                    <li>
-                      <NavDropdown.Item class="dropdown-item" href="#">Configuracion</NavDropdown.Item>
-                    </li>
-                    <li>
-                      <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
-                    </li>
-                  </NavDropdown>
-                  <Form className="d-flex">
-                    <FormControl
-                      type="search"
-                      placeholder="Buscar"
-                      className="me-2"
-                      aria-label="Search"
-                    />
-                    <Button variant='warning' style={{ 'color': 'black' }}>Buscar</Button>
-                  </Form>
-                </Offcanvas.Body>
-              </Navbar.Offcanvas>
-            </Container>
-          </Navbar>
-        ))}
+                    <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
+                        <Container fluid>
+                            <Navbar.Brand href="#"><i class="icon fa fa-gas-pump"></i>&ensp;<b>Aplicativo Rivera</b></Navbar.Brand>
+                            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+                            <Navbar.Offcanvas
+                                id={`offcanvasNavbar-expand-${expand}`}
+                                aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                                placement="end"
+                            >
+                                <Offcanvas.Header closeButton>
+                                    <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                        Aplicativo Rivera
+                                    </Offcanvas.Title>
+                                </Offcanvas.Header>
+                                <Offcanvas.Body>
+                                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                                        <Nav.Link href="/Dashboard"  >Dashboard</Nav.Link>
+                                        <NavDropdown
+                                            title="Cartera"
+                                            id={`offcanvasNavbarDropdown-expand-${expand}`}>
+                                            <li>
+                                                <NavDropdown.Item  href="/DatosCartera">
+                                                    Cartera
+                                                </NavDropdown.Item>
+                                            </li>
+                                            <li>
+                                                <NavDropdown.Item active href="/Tabla">
+                                                    Tabla Relacional
+                                                </NavDropdown.Item>
+                                            </li>
+                                            <li>
+                                                <NavDropdown.Item href="/Vista">
+                                                    Vista Plano
+                                                </NavDropdown.Item>
+                                            </li>
+                                        </NavDropdown>
+                                        <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
+                                        <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
+                                    </Nav>
+                                    <Nav
+                                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                        href="#"
+                                        id="navbarDropdownMenuAvatar"
+                                        role="button"
+                                        data-mdb-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <img
+                                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                            class="rounded-circle"
+                                            height="25"
+                                            alt="Black and White Portrait of a Man"
+                                            loading="lazy"
+                                        />
+                                    </Nav>
+                                    <NavDropdown
+                                        class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="navbarDropdownMenuAvatar">
+                                        <li>
+                                            <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
+                                        </li>
+                                    </NavDropdown>
+                                    <Form className="d-flex">
+                                        <FormControl
+                                            type="search"
+                                            placeholder="Buscar"
+                                            className="me-2"
+                                            aria-label="Search"
+                                        />
+                                        <Button variant='warning' style={{ 'color': 'black' }}>Buscar</Button>
+                                    </Form>
+                                </Offcanvas.Body>
+                            </Navbar.Offcanvas>
+                        </Container>
+                    </Navbar>
+                ))}
       </header>
       <div className="content">
         <section className="content-header">
@@ -226,8 +274,11 @@ const Tabla = () => {
               </div>
             </div>
           </div>
-          <Button variant='warning' style={{ 'color': 'black' }} href="/Registro_Relacional">Agregar</Button>
-          <Button variant='warning' style={{ 'color': 'black' }}>Confirmar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Registro_Relacional">Agregar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Relacionar">Actualizar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Eliminar_Relacional">Eliminar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
         </section>
         <div className="row">
         </div>
@@ -248,6 +299,8 @@ const Tabla = () => {
           pagination
           paginationComponentOptions={paginacionOpciones}
           fixedHeader
+          subHeader
+          subHeaderComponent={subHeaderComponentMemo}
           fixedHeaderScrollHeight="600px"
           noDataComponent={<span>No se encontró ningún elemento</span>}
         />
