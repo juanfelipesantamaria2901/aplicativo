@@ -2,7 +2,7 @@ import React from 'react';
 import { Label, GrupoInput, Input} from './styles';
 
 //llamo los atributos a usar
-const Inpunt = ({ estado, cambiarEstado, name, type, label,
+const Inpunt = ({ estado, cambiarEstado, name, type, label, disabled,
   placeholder, id }) => {
 
   //cambio de estado para validar
@@ -37,6 +37,7 @@ const Inpunt = ({ estado, cambiarEstado, name, type, label,
       <GrupoInput classname="form-group row">
         <Input classname="form-control"
           id={id}
+          disabled={disabled}
           name={name}
           type={type}
           placeholder={placeholder}

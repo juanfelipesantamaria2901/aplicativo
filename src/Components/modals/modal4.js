@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Button, Nav,
 } from 'react-bootstrap';
-import Inpunt from '../Inputs/Input';
+import { Select, Label } from '../../Components/Inputs/styles';
 
 // API back-end
-const API = process.env.REACT_APP_API;
+//const API = process.env.REACT_APP_API;
 
 //Componente Modal
 const Modal4 = () => {
@@ -20,10 +19,23 @@ const Modal4 = () => {
         window.alert("Se elimino el registro");
     }
 
+    const [relacional, setData] = useState([]);
+
+    const URL = 'http://192.168.0.19:3001/api/relacional'
+    const showData = async () => {
+      const response = await fetch(URL)
+      const data = await response.json()
+      setData(data)
+    }
+    useEffect(() => {
+      showData()
+    }
+      , [])
+
     //Values of the form to be sent to the API
-    const [TerceroMaster2, cambiarTerceroMaster] = useState({ campo: '' });
-    const  TerceroMaster =  TerceroMaster2.campo
-    const [SetTerceroMaster] = useState("")
+    const [TerceroMaster, cambiarTerceroMaster] = useState("");
+  //  const  TerceroMaster =  TerceroMaster2.campo
+ //   const [SetTerceroMaster] = useState("")
 
     //Render of the component
     return (
@@ -76,20 +88,20 @@ const Modal4 = () => {
                                     <div className="card-body ">
                                         <form onSubmit={handleSubmit}>
                                             <div className="row">
-                                                <div className="col-sm-3">
+                                            <div className="col-sm-4">
                                                     <div className="form-group">
-                                                        <Inpunt
-                                                            required
-                                                            estado={TerceroMaster2}
-                                                            cambiarEstado={cambiarTerceroMaster}
-                                                            name="TerceroMaster"
-                                                            type="text"
-                                                            label="Tercero Master"
-                                                            placeholder="Escribe..."
-                                                            id="TerceroMaster"
-                                                            value={TerceroMaster2}
-                                                            onChange={(e) => SetTerceroMaster(e.target.value)}
-                                                        />
+                                                        <Label className="Select-FormasPago">Tercero Master</Label>
+                                                        <Select name="FormasPago" id="FormasPago"
+                                                            Classname="form-select"
+                                                            showSearch
+                                                            value={TerceroMaster}
+                                                            onChange={(e) => cambiarTerceroMaster(e.target.value)}
+                                                            required>
+                                                            <option selected>Seleccione una opcion</option>
+                                                            {relacional.map((item, index) => (
+                                                                <option key={index} value={item.TerceroMaster}>{item.TerceroMaster}</option>
+                                                            ))}
+                                                        </Select>
                                                     </div>
                                                 </div>
                                             </div>

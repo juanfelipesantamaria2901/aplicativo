@@ -253,7 +253,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group" >
                                                         <Inpunt
-                                                            required
+                                                             disabled={true}
                                                             estado={IdSede2}
                                                             cambiarEstado={cambiarIdSede}
                                                             name="IdSede"
@@ -269,7 +269,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={IdDocumento2}
                                                             cambiarEstado={cambiarIdDocumento}
                                                             name="IdDocumento"
@@ -285,7 +285,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={IdTurno2}
                                                             cambiarEstado={cambiarIdTurno}
                                                             name="IdTurno"
@@ -301,7 +301,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={CodigoIsla2}
                                                             cambiarEstado={cambiarCodigoIsla}
                                                             name="CodigoIsla"
@@ -318,6 +318,7 @@ const [Data, setData] = useState([]);
                                                     <div className="form-group">
                                                         <Inpunt
                                                             required
+                                                            disabled={true}
                                                             estado={Vendedor2}
                                                             cambiarEstado={cambiarVendedor}
                                                             name="Vendedor"
@@ -367,7 +368,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                           disabled={true}
                                                             estado={Articulo2}
                                                             cambiarEstado={cambiarArticulo}
                                                             name="Articulo"
@@ -383,7 +384,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={VolumenVenta2}
                                                             cambiarEstado={cambiarVolumenVenta}
                                                             name="VolumenVenta"
@@ -399,7 +400,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={ValorUnitario2}
                                                             cambiarEstado={cambiarValorUnitario}
                                                             name="ValorUnitario"
@@ -415,7 +416,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                          disabled={true}
                                                             estado={ValorVenta2}
                                                             cambiarEstado={cambiarValorVenta}
                                                             name="ValorVenta"
@@ -468,7 +469,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={CodigoCara2}
                                                             cambiarEstado={cambiarCodigoCara}
                                                             name="CodigoCara"
@@ -484,7 +485,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={CodigoManguera2}
                                                             cambiarEstado={cambiarCodigoManguera}
                                                             name="CodigoManguera"
@@ -500,7 +501,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={PrefijoFactura2}
                                                             cambiarEstado={cambiarPrefijoFactura}
                                                             name="PrefijoFactura"
@@ -516,7 +517,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={NumeroFactura2}
                                                             cambiarEstado={cambiarNumeroFactura}
                                                             name="NumeroFactura"
@@ -535,7 +536,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                           disabled={true}
                                                             estado={FechaZeta2}
                                                             cambiarEstado={cambiarFechaZeta}
                                                             name="FechaZeta"
@@ -551,7 +552,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={Fecha2}
                                                             cambiarEstado={cambiarFecha}
                                                             name="Fecha"
@@ -567,7 +568,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                          disabled={true}
                                                             estado={Hora2}
                                                             cambiarEstado={cambiarHora}
                                                             name="Hora"
@@ -583,7 +584,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                           disabled={true}
                                                             estado={Rom2}
                                                             cambiarEstado={cambiarRom}
                                                             name="Rom"
@@ -599,7 +600,7 @@ const [Data, setData] = useState([]);
                                                 <div className="col-sm-4">
                                                     <div className="form-group">
                                                         <Inpunt
-                                                            required
+                                                            disabled={true}
                                                             estado={Kilometraje2}
                                                             cambiarEstado={cambiarKilometraje}
                                                             name="Kilometraje"
