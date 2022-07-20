@@ -1,0 +1,28 @@
+.rdt_TableCol{
+    background-color: #171616;
+    color : #f8a51e;
+}
+.rdt_TableCol:hover{
+    background-color: #45423d;
+    color : #f8a51e;
+}
+.rdt_Table{
+    border-radius: 5px;
+}
+.rdt_TableRow:hover{
+    background-color: #45423d;
+}
+.rdt_TableFooter{
+    background-color: #45423d;
+    color : #f8a51e;
+}
+.rdt_TablePager{
+    background-color: #45423d;
+    color : #f8a51e;
+}
+.barraBusqueda{
+    background-color: #171616;
+}
+.content{
+    margin-left: 0px;
+}
