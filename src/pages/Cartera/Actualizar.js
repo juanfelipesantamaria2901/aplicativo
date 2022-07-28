@@ -15,7 +15,7 @@ const Actualizar = () => {
     //Mehotd for sent data to API
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://192.168.0.19:3001/api/products/${IdDocumento}&${IdSede}`, {
+        const res = await fetch(`http://54.89.180.59:3001/api/products/${IdDocumento}&${IdSede}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const [Data, setData] = useState([]);
 
     const handleSubmit2 = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://192.168.0.19:3001/api/products/${IdDocumento3}&${IdSede3}`, {
+        const res = await fetch(`http://54.89.180.59:3001/api/products/${IdDocumento3}&${IdSede3}`, {
             method: "GET"
         });
         const data = await res.json();

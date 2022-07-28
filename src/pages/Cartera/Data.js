@@ -24,7 +24,7 @@ const paginacionOpciones = {
 const Compoentedata = () => {
 
     const [cartera, setData] = useState([]);
-    const URL = 'http://192.168.0.19:3001/api/cartera'
+    const URL = 'http://54.89.180.59:3001/api/cartera'
 
 
     const showData = async () => {

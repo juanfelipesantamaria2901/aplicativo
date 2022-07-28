@@ -30,7 +30,7 @@ function App() {
         {/* Tabla */}
         <Route path="/Tabla" element={<Tabla />} />
         {/* Login*/}
-        <Route path="/" element={<Login/>} />
+        <Route path="/" element={<Cartera4/>} />
         <Route path="/index.html" element={<Login/>} />
         {/* Dashboard*/}
         <Route path="/Dashboard" element={<Dashboard/>} />        

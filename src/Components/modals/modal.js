@@ -15,7 +15,7 @@ const Modal = () => {
     //Mehotd for sent data to API
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://192.168.0.19:3001/api/cartera`, {
+        const res = await fetch(`http://54.89.180.59:3001/api/cartera`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

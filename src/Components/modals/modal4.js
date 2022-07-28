@@ -13,7 +13,7 @@ const Modal4 = () => {
     //Mehotd for sent data to API
     const handleSubmit = async (e) => {
         e.preventDefault();
-        fetch(`http://192.168.0.19:3001/api/delete/${TerceroMaster}`, {
+        fetch(`http://54.89.180.59:3001/api/delete/${TerceroMaster}`, {
             method: "DELETE",
         });
         window.alert("Se elimino el registro");
@@ -21,7 +21,7 @@ const Modal4 = () => {
 
     const [relacional, setData] = useState([]);
 
-    const URL = 'http://192.168.0.19:3001/api/relacional'
+    const URL = 'http://54.89.180.59:3001/api/relacional'
     const showData = async () => {
       const response = await fetch(URL)
       const data = await response.json()
