@@ -48,7 +48,7 @@ import { Select, Label, Input2} from '../../Components/Inputs/styles';
 
 
 
-const Cartera4 = () => {
+const Cartera5 = () => {
 
     const [tablaUsuarios, setTablaUsuarios] = useState([]);
     const [tablaUsuarios2, setTablaUsuarios2] = useState([]);
@@ -110,7 +110,7 @@ const Cartera4 = () => {
     const [Data2, setData2] = useState([]);
     const handleSubmit2 = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://192.168.10.247:3001/api/rel/${TerceroMaster}`, {
+        const res = await fetch(`http://192.168.10.247:3001/api/relacional/${TerceroMaster}`, {
             method: "GET"
         });
         const data = await res.json();
@@ -150,11 +150,11 @@ const Cartera4 = () => {
     const [TerceroMaster, cambiarTerceroMaster] = useState("")
     const TerceroMaster2 = TerceroMaster
 //    const  TerceroMaster =  TerceroMaster2.campo
-    const [Identificacion2, cambiarIdentificacion] =  useState("")
-    const  IdentificacionCliente =  Identificacion2
+    const [Identificacion2, cambiarIdentificacion] = useState({ campo: '' });
+    const  IdentificacionCliente =  Identificacion2.campo
     const [SetIdentificacion] = useState("")
-    const [Nombre2, cambiarNombre] =  useState("")
-    const NombreCliente = Nombre2
+    const [Nombre2, cambiarNombre] = useState({ campo: '' });
+    const NombreCliente = Nombre2.campo
     const [SetNombre] = useState("")
 
 
@@ -333,7 +333,6 @@ const Cartera4 = () => {
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} href={"/Actualizar"} >Actualizar</Button>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={handleShow} >Filtrar</Button>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
                 </section>
                 <Compoentedata />
             </div>
@@ -375,34 +374,34 @@ const Cartera4 = () => {
                                                 </div>
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
-                                                    <Label className="Select-FormasPago">Identificacion Cliente</Label>
-                                                        <Select name="FormasPago" id="FormasPago"
-                                                            Classname="form-select"
-                                                            showSearch
+                                                        <Inpunt
+                                                            required
+                                                            estado={Identificacion2}
+                                                            cambiarEstado={cambiarIdentificacion}
+                                                            name="Identificacion"
+                                                            type="text"
+                                                            label="Identificacion"
+                                                            placeholder="Escribe..."
+                                                            id="Identificacion"
                                                             value={Identificacion2}
-                                                            onChange={(e) => cambiarIdentificacion(e.target.value)}
-                                                            required>
-                                                            <option selected>Seleccione una opcion</option>
-                                                            {relacional.map((item, index) => (
-                                                                <option key={index} value={item.Identificacion}>{item.Identificacion}</option>
-                                                            ))}
-                                                        </Select>
+                                                            onChange={(e) => SetIdentificacion(e.target.value)}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="col-sm-3">
                                                     <div className="form-group">
-                                                    <Label className="Select-FormasPago">Nombre Cliente</Label>
-                                                        <Select name="FormasPago" id="FormasPago"
-                                                            Classname="form-select"
-                                                            showSearch
+                                                        <Inpunt
+                                                            required
+                                                            estado={Nombre2}
+                                                            cambiarEstado={cambiarNombre}
+                                                            name="Nombre"
+                                                            type="text"
+                                                            label="Nombre"
+                                                            placeholder="Escribe..."
+                                                            id="Nombre"
                                                             value={Nombre2}
-                                                            onChange={(e) => cambiarNombre(e.target.value)}
-                                                            required>
-                                                            <option selected>Seleccione una opcion</option>
-                                                            {relacional.map((item, index) => (
-                                                                <option key={index} value={item.Nombre}>{item.Nombre}</option>
-                                                            ))}
-                                                        </Select>
+                                                            onChange={(e) => SetNombre(e.target.value)}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -433,4 +432,4 @@ const Cartera4 = () => {
     );
 }
 
-export default Cartera4;  
+export default Cartera5;  

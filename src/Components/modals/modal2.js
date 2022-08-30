@@ -14,7 +14,7 @@ const Modal2 = () => {
     //Mehotd for sent data to API
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://54.89.180.59:3001/api/relacional`, {
+        const res = await fetch(`http://192.168.10.247:3001/api/relacional`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

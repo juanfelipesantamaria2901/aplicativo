@@ -24,7 +24,7 @@ const paginacionOpciones = {
 const Compoentedata = () => {
 
     const [cartera, setData] = useState([]);
-    const URL = 'http://54.89.180.59:3001/api/cartera'
+    const URL = 'http://192.168.10.247:3001/api/cartera'
 
 
     const showData = async () => {
@@ -100,9 +100,9 @@ const Compoentedata = () => {
         setData(resultadosBusqueda3);
     }
 
-    const[TotalVolumen, setTotalVolumen] = useState(0);
-    const[TotalValor, setTotalValor] = useState(0);
-    
+    const [TotalVolumen, setTotalVolumen] = useState("");
+    const [TotalValor, setTotalValor] = useState("");
+
     const sumar = () => {
         var suma = 0;
         var suma2 = 0;
@@ -110,9 +110,15 @@ const Compoentedata = () => {
             suma += cartera[i].VolumenVenta;
             suma2 += cartera[i].ValorVenta;
         }
-        setTotalVolumen(suma);
-        setTotalValor(suma2);
-    }  
+        let totalVolumen = (suma).toLocaleString("en-US",{ minimumFractionDigits: 2});
+        let totalValor = (suma2).toLocaleString("en-US", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+        });
+        setTotalVolumen(totalVolumen);
+        setTotalValor(totalValor);
+    }
     useEffect(() => {
         sumar()
     })
@@ -122,126 +128,147 @@ const Compoentedata = () => {
         name: 'Sede',
         selector: row => row.IdSede,
         sortable: true,
-        maxWidth : '3%',
+        maxWidth: '3%',
+        align: 'center',
     },
     {
         name: 'Turno',
         selector: row => row.IdTurno,
         sortable: true,
-        align: 'center', 
-        maxWidth : '3%',
+        align: 'center',
+        maxWidth: '5%',
     },
     {
         name: 'Isla',
         selector: row => row.CodigoIsla,
         sortable: true,
-        maxWidth : '3%',
+        maxWidth: '3%',
+        align: 'center',
     },
     {
         name: 'Vendedor',
         selector: row => row.NombreVendedor,
         sortable: true,
-        grow : '4',
+        width: '200px',
     },
     {
         name: 'Iden Cliente',
         selector: row => row.IdentificacionCliente,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Cliente',
         selector: row => row.NombreCliente,
         sortable: true,
-        grow : '5',
+        width: '330px',
     },
     {
         name: 'Id Doc',
         selector: row => row.IdDocumento,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Articulo',
         selector: row => row.Articulo,
         sortable: true,
-        align: 'center', 
-        grow : '4',
+        align: 'center',
+        width: '180px',
     },
     {
         name: 'Volumen',
         selector: row => row.VolumenVenta,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'PPU',
         selector: row => row.ValorUnitario,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Valor Venta',
         selector: row => row.ValorVenta,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Placa',
         selector: row => row.Placa,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Forma Pago',
         selector: row => row.FormasPago,
         sortable: true,
-        grow : '3',
+        width: '150px',
+        align: 'center',
     },
     {
         name: 'Cara',
         selector: row => row.CodigoCara,
         sortable: true,
+        maxWidth: '3%',
+        align: 'center',
     },
     {
         name: 'Mangueral',
         selector: row => row.CodigoManguera,
         sortable: true,
+        maxWidth: '5%',
+        align: 'center',
     },
     {
         name: 'Pre Factura',
         selector: row => row.PrefijoFactura,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'NumFactura',
         selector: row => row.NumeroFactura,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Fecha Zeta',
         selector: row => row.FechaZeta,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Fecha',
         selector: row => row.Fecha,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Hora',
         selector: row => row.Hora,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Km',
         selector: row => row.Kilometraje,
         sortable: true,
+        align: 'center',
     },
     {
         name: 'Rom',
         selector: row => row.Rom,
         sortable: true,
-        grow : '5',
+        grow: '5',
+        width: 'auto',
     },
     {
         name: 'Cuenta',
         selector: row => row.Cuenta,
         sortable: true,
+        align: 'center',
     },
 
     ]
@@ -273,74 +300,74 @@ const Compoentedata = () => {
     const subHeaderComponentMemo = React.useMemo(() => {
 
         return (
-            <div style={{ width: '100%' } }>
-            <Input2
-                type="text"
-                placeholder="Buscar Id Sede"
-                className="textField"
-                name="busqueda"
-                value={busqueda}
-                onChange={handleChange} />
+            <div style={{ width: '100%' }}>
                 <Input2
-                type="text"
-                placeholder="Buscar Fecha"
-                className="textField"
-                name="busqueda2"
-                value={busqueda2}
-                onChange={handleChange2} />
+                    type="text"
+                    placeholder="Buscar Id Sede"
+                    className="textField"
+                    name="busqueda"
+                    value={busqueda}
+                    onChange={handleChange} />
                 <Input2
-                type="text"
-                placeholder="Buscar"
-                className="textField"
-                name="busqueda3"
-                value={busqueda3}
-                onChange={handleChange3} />
-               </div>
+                    type="text"
+                    placeholder="Buscar Fecha"
+                    className="textField"
+                    name="busqueda2"
+                    value={busqueda2}
+                    onChange={handleChange2} />
+                <Input2
+                    type="text"
+                    placeholder="Buscar"
+                    className="textField"
+                    name="busqueda3"
+                    value={busqueda3}
+                    onChange={handleChange3} />
+            </div>
         );
-    }, [busqueda, handleChange, busqueda2, busqueda3,handleChange2,handleChange3]);
+    }, [busqueda, handleChange, busqueda2, busqueda3, handleChange2, handleChange3]);
 
     return (
         <div>
-        <div className="row">
-        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
-            text={'white'}
-            className="card">
-            <div classname="card head"><b>Transacciones Totales:</b></div>
-            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{cartera.length}</div>
-        </div>
-        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
-            text={'white'}
-            className="card">
-            <div classname="card head"> <b>Total Volumen Ventas: </b></div>
-            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalVolumen}</div>
-        </div>
-        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
-            text={'white'}
-            className="card">
-            <div classname="card head"><b>Total Valor de Ventas:</b></div>
-            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalValor}</div>
-        </div>
-    </div>
-                 <div style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
-                 <div className="card-header bg-warning">
-                     <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
-                 </div>
-        <DataTable
-            bordered
-            hover
-            columns={columns}
-            theme="custom-theme"
-            data={cartera}
-            pagination
-            responsive={true}
-            paginationComponentOptions={paginacionOpciones}
-            noDataComponent={<span>No se encontró ningún elemento</span>}
-            subHeader
-            subHeaderComponent={subHeaderComponentMemo}
-            selectableRows
-            persistTableHead
-        />
-        </div>
+            <div className="row">
+                <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                    text={'white'}
+                    className="card">
+                    <div classname="card head"><b>Transacciones Totales:</b></div>
+                    <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{cartera.length}</div>
+                </div>
+                <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                    text={'white'}
+                    className="card">
+                    <div classname="card head"> <b>Total Volumen Ventas: </b></div>
+                    <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalVolumen}</div>
+                </div>
+                <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                    text={'white'}
+                    className="card">
+                    <div classname="card head"><b>Total Valor de Ventas:</b></div>
+                    <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalValor}</div>
+                </div>
+            </div>
+            <div style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
+                <div className="card-header bg-warning">
+                    <h3 className="card-title"><b>Cuadre Diario Cartera</b></h3>
+                </div>
+                <DataTable
+                    bordered
+                    hover
+                    columns={columns}
+                    theme="custom-theme"
+                    data={cartera}
+                    pagination
+                    responsive={true}
+                    paginationComponentOptions={paginacionOpciones}
+                    noDataComponent={<span>No se encontró ningún elemento</span>}
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
+                    selectableRows
+                    persistTableHead
+                />
+            </div>
         </div>
     );
 }

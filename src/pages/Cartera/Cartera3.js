@@ -13,7 +13,7 @@ import {
 
 const Data = () => {
     const [cartera, setData] = useState([]);
-    const URL = 'http://192.168.0.19:3001/api/vistaplano'
+    const URL = 'http://192.168.10.247:3001/api/vistaplano'
     const showData = async () => {
         const response = await fetch(URL)
         const data = await response.json()

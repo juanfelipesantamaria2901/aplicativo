@@ -7,7 +7,8 @@ import 'styled-components'
 import './Cartera.css';
 import { Input2 } from '../../Components/Inputs/styles';
 import { CSVLink } from 'react-csv';
-import {Button, Card, } from 'react-bootstrap';
+import { Button, Card, } from 'react-bootstrap';
+import { saveAs } from 'file-saver'
 
 
 const paginacionOpciones = {
@@ -21,7 +22,7 @@ const paginacionOpciones = {
 const Plano = () => {
 
     const [cartera, setData] = useState([]);
-    const URL = 'http://54.89.180.59:3001/api/vistaplano'
+    const URL = 'http://192.168.10.247:3001/api/vistaplano'
 
 
     const showData = async () => {
@@ -37,6 +38,7 @@ const Plano = () => {
 
     const [tablaUsuarios, setTablaUsuarios] = useState([]);
     const [tablaUsuarios2, setTablaUsuarios2] = useState([]);
+    const [tablaUsuarios3, setTablaUsuarios3] = useState([]);
     const [busqueda, setBusqueda] = useState("");
     const [busqueda2, setBusqueda2] = useState("");
     const [busqueda3, setBusqueda3] = useState("");
@@ -57,6 +59,7 @@ const Plano = () => {
         filtrar3(e.target.value);
     }
 
+
     const filtrar = (terminoBusqueda) => {
         var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
             if (elemento.IdSede.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
@@ -67,6 +70,7 @@ const Plano = () => {
         setData(resultadosBusqueda);
         setTablaUsuarios2(resultadosBusqueda);
     }
+
     const filtrar2 = (terminoBusqueda) => {
         var resultadosBusqueda2 = tablaUsuarios2.filter((elemento) => {
             if (elemento.FechaZeta.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
@@ -75,24 +79,24 @@ const Plano = () => {
             }
         });
         setData(resultadosBusqueda2);
-        setTablaUsuarios2(resultadosBusqueda2);
+        setTablaUsuarios3(resultadosBusqueda2);
     }
+
     const filtrar3 = (terminoBusqueda) => {
-        var resultadosBusqueda = tablaUsuarios2.filter((elemento) => {
-            if ( elemento.IdentificacionCliente.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+        var resultadosBusqueda3 = tablaUsuarios3.filter((elemento) => {
+            if (elemento.IdentificacionCliente.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
                 || elemento.NombreCliente.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
+                || elemento.CantIdDocumento.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
                 || elemento.Articulo.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
-                || elemento.ValorVenta.toString().toUpperCase().includes(terminoBusqueda.toUpperCase())
             ) {
                 return elemento;
             }
         });
-        setData(resultadosBusqueda);
-        
+        setData(resultadosBusqueda3);
     }
 
-    const [TotalVolumen, setTotalVolumen] = useState(0);
-    const [TotalValor, setTotalValor] = useState(0);
+    const [TotalVolumen, setTotalVolumen] = useState("");
+    const [TotalValor, setTotalValor] = useState("");
 
     const sumar = () => {
         var suma = 0;
@@ -101,13 +105,133 @@ const Plano = () => {
             suma += cartera[i].ValorVenta;
             suma2 += cartera[i].CantIdDocumento;
         }
-        setTotalVolumen(suma);
-        setTotalValor(suma2);
+        let totalVolumen = (suma).toLocaleString("en-US", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+        });
+        let totalValor = (suma2).toLocaleString({ minimumFractionDigits: 2 });
+        setTotalVolumen(totalVolumen);
+        setTotalValor(totalValor);
     }
     useEffect(() => {
         sumar()
     })
 
+    
+
+
+    const createFile = () => {
+   
+     
+        let MyValue = "";
+        let MyValue2 = "";
+        let MyValue3 = "";
+        let MyValue4 = "";
+        let MyValue5 = "";
+        let MyValue6 = "";
+        let nReg = 0;
+        let nTotal = TotalVolumen;
+        let nCuenta13 = 0;
+        let nCuenta41350801 = 0;
+        let nCuenta41350802 = 0;
+        let nCuenta41350803 = 0;
+        let nCuenta41350805 = 0;
+        let nSede1 = busqueda
+        let NumeroItems = cartera.length;
+        let Empresa = "002";
+        let comenta = "REGISTRO CREDITOS COMBUSTILE POR TERCERO";
+        let conse = 1;
+        let Principio = (conse.toString()) + "00000001002";
+        conse++;
+        let nSede = nSede1.toString() 
+        let nCliente =  cartera.map(function(NombreCliente){return NombreCliente}).toString()
+        let nArticulo1 = cartera.map(function(Articulo){ return Articulo}).toString()
+
+
+        if (nArticulo1.toString() === "GASOLINA CORRIENTE") {
+            nCuenta41350801 += cartera.map(function(ValorVenta){ return ValorVenta}).toString()
+        }
+        if (nArticulo1.toString() === "GASOLINA EXTRA") {
+            nCuenta41350802+= cartera.map(function(ValorVenta){ return ValorVenta}).toString()
+        }
+        if (nArticulo1.toString() === "DIESEL") {
+            nCuenta41350803+= cartera.map(function(ValorVenta){ return ValorVenta}).toString()
+            
+        }
+        if (nArticulo1.toString() === "MAX PRO") {
+            nCuenta41350805+= cartera.map(function(ValorVenta){ return ValorVenta}).toString()
+        }
+
+        nCuenta13 = TotalVolumen
+        let fecha = busqueda2 
+
+
+        //Generar encabezado 
+        MyValue = (conse.toString() + "03510105" + Empresa + nSede + "00000000" , "13050502" + nCliente + nSede + "99" , "+" +
+            "{0:000000000000000}", TotalVolumen + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+             "{0:000000000000000}", TotalVolumen + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+            "000000000000000.0000+000000000000000.0000" + comenta + nSede  + "00000000"  + fecha + "+000000000000000.0000+" +
+            "000000000000000.0000+000000000000000.0000+000000000000000.0000+000000000000000.0000+000000000000000.0000+000000000000000.0000"
+             + "79152303" + fecha + comenta)
+            conse++;
+        MyValue2= (conse.toString() + "03510004" + Empresa + nSede + (3, ' ') + "00000000" + TotalVolumen + nCliente + nSede + "99" +
+        (' ', 15) + (' ', 10) + "+" +
+        "000000000000000.0000+" , "{0:000000000000000}", TotalVolumen + ".0000+" , "000000000000000.0000+000000000000000.0000+" +
+        "000000000000000.0000+000000000000000.0000+" , "{0:000000000000000}", TotalVolumen + ".0000+",+ "000000000000000.0000+000000000000000.0000+" +
+        "000000000000000.0000+000000000000000.0000+" , "{0:000000000000000}", TotalVolumen + ".0000+" , "000000000000000.0000+000000000000000.0000+" +
+        "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" +(' ', 30) + comenta);
+    conse++;
+
+    if (nCuenta41350801>0)
+    {
+        MyValue4 = (conse.toString() + "03510004" + Empresa + nSede + (3, ' ') + "00000000" , "41350801" , "PLANILLA" + nSede + "99"  +
+               (' ', 15) + (' ', 10) + "+" +
+           "{0:000000000000000}", nCuenta41350801 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+           "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350801 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+           "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350801 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+           "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" +(' ', 30) + comenta);
+        conse++;
+    }
+      
+    // se inserta los totales de la cuenta 41350802 planilla
+    if (nCuenta41350802 > 0)
+    {
+        MyValue3 = (conse.toString()+ "03510004" + Empresa + nSede  + "00000000" , "41350802" , "PLANILLA" + nSede + "99" +
+              (' ', 15) + (' ', 10) + "+" +
+         ("{0:000000000000000}", nCuenta41350802 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350802 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350802 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+          "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" , ' ', 30) + comenta);
+        conse++;
+    }
+    // se inserta los totales de la cuenta 41350803 planilla
+    if (nCuenta41350803 > 0)
+    {
+       MyValue5 = (conse.toString() + "03510004" + Empresa + nSede  + "00000000" , "41350803" , "PLANILLA" + nSede + "99" +
+             (' ', 15) + (' ', 10) + "+" +
+         "{0:000000000000000}", nCuenta41350803 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+         "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350803+ ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+         "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350803 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+         "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" , (' ', 2) + "00000000" + (' ', 30) + comenta);
+        conse++;
+    }
+    // se inserta los totales de la cuenta 41350805 planilla
+    if (nCuenta41350805 > 0)
+    {
+        MyValue6 = (conse.toString() + "03510004" + Empresa + nSede  + "00000000" , "41350805" , "PLANILLA" + nSede + "99" +
+             (' ', 15) +(' ', 10) + "+" +
+       "{0:000000000000000}", nCuenta41350805 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350805 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350805 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
+          "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" + (' ', 30) + comenta);
+        conse++;
+
+        const blob = new Blob([Principio, MyValue,MyValue2,MyValue4,MyValue3,MyValue5, MyValue6], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, 'Plano Contable.txt');
+           
+    }
+}
 
 
     const columns = [{
@@ -175,31 +299,31 @@ const Plano = () => {
     const subHeaderComponentMemo = React.useMemo(() => {
 
         return (
-            <div style={{ width: '100%' } }>
-            <Input2
-                type="text"
-                placeholder="Buscar Id Sede"
-                className="textField"
-                name="busqueda"
-                value={busqueda}
-                onChange={handleChange} />
+            <div style={{ width: '100%' }}>
                 <Input2
-                type="text"
-                placeholder="Buscar Fecha"
-                className="textField"
-                name="busqueda2"
-                value={busqueda2}
-                onChange={handleChange2} />
+                    type="text"
+                    placeholder="Buscar Id Sede"
+                    className="textField"
+                    name="busqueda"
+                    value={busqueda}
+                    onChange={handleChange} />
                 <Input2
-                type="text"
-                placeholder="Buscar"
-                className="textField"
-                name="busqueda3"
-                value={busqueda3}
-                onChange={handleChange3} />
-               </div>
+                    type="text"
+                    placeholder="Buscar Fecha"
+                    className="textField"
+                    name="busqueda2"
+                    value={busqueda2}
+                    onChange={handleChange2} />
+                <Input2
+                    type="text"
+                    placeholder="Buscar"
+                    className="textField"
+                    name="busqueda3"
+                    value={busqueda3}
+                    onChange={handleChange3} />
+            </div>
         );
-    }, [busqueda, handleChange, busqueda2, busqueda3,handleChange2,handleChange3]);
+    }, [busqueda, handleChange, busqueda2, busqueda3, handleChange2, handleChange3]);
 
     return (
         <div className="content">
@@ -216,24 +340,25 @@ const Plano = () => {
                         </div>
                     </div>
                 </div>
-                <CSVLink data={cartera} filename={"Exportacion.csv"}> <Button variant='warning' style={{ 'color': 'black' }}>Generar Plano</Button></CSVLink>
+                <CSVLink data={cartera} filename={"Exportacion.csv"}> <Button variant='warning' style={{ 'color': 'black' }}>Exportar Datos</Button></CSVLink>
+                <Button variant='warning' style={{ 'color': 'black' }} onClick={createFile}>Generar Plano</Button>
             </section>
             <div className="row">
             </div>
             <div className="row">
-                        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
-                            text={'white'}
-                            className="card">
-                            <div classname="card head"> <b> Cant de Id Documento: </b></div>
-                            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalValor}</div>
-                        </div>
-                        <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
-                            text={'white'}
-                            className="card">
-                            <div classname="card head"><b>Total Valor de Ventas:  </b></div>
-                            <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalVolumen}</div>
-                        </div>
-                    </div>
+                <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                    text={'white'}
+                    className="card">
+                    <div classname="card head"> <b> Cant de Id Documento: </b></div>
+                    <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalValor}</div>
+                </div>
+                <div bg={'dark'} style={{ width: '250px', height: '60px', margin: '25px', color: '#f8a51e', backgroundColor: '#171616' }}
+                    text={'white'}
+                    className="card">
+                    <div classname="card head"><b>Total Valor de Ventas:  </b></div>
+                    <div className="card body" style={{ color: '#ffffff', backgroundColor: '#171616' }}>{TotalVolumen}</div>
+                </div>
+            </div>
             <Card style={{ "width": "100%", "border-radius": "5px", 'height': '80%', 'margin': '5px', ' background-color': '#212121' }}>
                 <div className="card-header bg-warning">
                     <h3 className="card-title"><b>Vista Plano Cartera</b></h3>

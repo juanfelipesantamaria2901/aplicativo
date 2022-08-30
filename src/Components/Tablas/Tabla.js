@@ -19,7 +19,7 @@ const Tabla = () => {
 
   const [relacional, setData] = useState([]);
 
-  const URL = 'http://54.89.180.59:3001/api/relacional'
+  const URL = 'http://192.168.10.247:3001/api/relacional'
   const showData = async () => {
     const response = await fetch(URL)
     const data = await response.json()
@@ -160,30 +160,27 @@ const Tabla = () => {
   return (
     <div>
       <header>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-          crossorigin="anonymous"
-        />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
-        <link rel="stylesheet"
-          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/plugins/table-editor.min.css" />
-        <link rel="stylesheet"
-          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/modules/b4bca5d779777cff9d5c51553952a0a1.min.css" />
-        <link rel="stylesheet" id="roboto-subset.css-css"
-          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
-          type="text/css" media="all" />
+      <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+                    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+                    crossorigin="anonymous"
+                />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
+                <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
 
-
-        <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-        <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
-
+                <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+                <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+                <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+                <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
+                <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
+                <script src="http://cnd.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
         {['sm'].map((expand) => (
-                    <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
+                   <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
                         <Container fluid>
                             <Navbar.Brand href="#"><i class="icon fa fa-gas-pump"></i>&ensp;<b>Aplicativo Rivera</b></Navbar.Brand>
                             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
