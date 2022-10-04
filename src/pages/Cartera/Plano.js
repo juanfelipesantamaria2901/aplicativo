@@ -8,7 +8,8 @@ import './Cartera.css';
 import { Input2 } from '../../Components/Inputs/styles';
 import { CSVLink } from 'react-csv';
 import { Button, Card, } from 'react-bootstrap';
-import { saveAs } from 'file-saver'
+// import './../../../node_modules/react-input-calendar/style/index.css'
+import Calendar from 'react-input-calendar'
 
 
 const paginacionOpciones = {
@@ -42,6 +43,27 @@ const Plano = () => {
     const [busqueda, setBusqueda] = useState("");
     const [busqueda2, setBusqueda2] = useState("");
     const [busqueda3, setBusqueda3] = useState("");
+
+    const regex = /-/gi;
+    let fecha2 = busqueda2.replace(regex, '')
+    let fecha = (fecha2.trim())
+ 
+    const createFile = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`https://tsriverabravaapi.azurewebsites.net/api/GeneraPlanoContable/${fecha}/${busqueda}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data != null) {
+            window.alert("¡Plano Generado Correctamente!");
+        } else {
+            window.alert("¡Error al Generar el Plano!");
+        }
+    }
 
 
     const handleChange = e => {
@@ -118,122 +140,6 @@ const Plano = () => {
         sumar()
     })
 
-    
-
-
-    const createFile = () => {
-   
-     
-        let MyValue = "";
-        let MyValue2 = "";
-        let MyValue3 = "";
-        let MyValue4 = "";
-        let MyValue5 = "";
-        let MyValue6 = "";
-        let nReg = 0;
-        let nTotal = TotalVolumen;
-        let nCuenta13 = 0;
-        let nCuenta41350801 = 0;
-        let nCuenta41350802 = 0;
-        let nCuenta41350803 = 0;
-        let nCuenta41350805 = 0;
-        let nSede1 = busqueda
-        let NumeroItems = cartera.length;
-        let Empresa = "002";
-        let comenta = "REGISTRO CREDITOS COMBUSTILE POR TERCERO";
-        let conse = 1;
-        let Principio = (conse.toString()) + "00000001002";
-        conse++;
-        let nSede = nSede1.toString() 
-        let nCliente =  cartera.map(function(NombreCliente){return NombreCliente}).toString()
-        let nArticulo1 = cartera.map(function(Articulo){ return Articulo}).toString()
-
-
-        if (nArticulo1.toString() === "GASOLINA CORRIENTE") {
-            nCuenta41350801 += cartera.map(function(ValorVenta){ return ValorVenta}).toString()
-        }
-        if (nArticulo1.toString() === "GASOLINA EXTRA") {
-            nCuenta41350802+= cartera.map(function(ValorVenta){ return ValorVenta}).toString()
-        }
-        if (nArticulo1.toString() === "DIESEL") {
-            nCuenta41350803+= cartera.map(function(ValorVenta){ return ValorVenta}).toString()
-            
-        }
-        if (nArticulo1.toString() === "MAX PRO") {
-            nCuenta41350805+= cartera.map(function(ValorVenta){ return ValorVenta}).toString()
-        }
-
-        nCuenta13 = TotalVolumen
-        let fecha = busqueda2 
-
-
-        //Generar encabezado 
-        MyValue = (conse.toString() + "03510105" + Empresa + nSede + "00000000" , "13050502" + nCliente + nSede + "99" , "+" +
-            "{0:000000000000000}", TotalVolumen + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-             "{0:000000000000000}", TotalVolumen + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-            "000000000000000.0000+000000000000000.0000" + comenta + nSede  + "00000000"  + fecha + "+000000000000000.0000+" +
-            "000000000000000.0000+000000000000000.0000+000000000000000.0000+000000000000000.0000+000000000000000.0000+000000000000000.0000"
-             + "79152303" + fecha + comenta)
-            conse++;
-        MyValue2= (conse.toString() + "03510004" + Empresa + nSede + (3, ' ') + "00000000" + TotalVolumen + nCliente + nSede + "99" +
-        (' ', 15) + (' ', 10) + "+" +
-        "000000000000000.0000+" , "{0:000000000000000}", TotalVolumen + ".0000+" , "000000000000000.0000+000000000000000.0000+" +
-        "000000000000000.0000+000000000000000.0000+" , "{0:000000000000000}", TotalVolumen + ".0000+",+ "000000000000000.0000+000000000000000.0000+" +
-        "000000000000000.0000+000000000000000.0000+" , "{0:000000000000000}", TotalVolumen + ".0000+" , "000000000000000.0000+000000000000000.0000+" +
-        "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" +(' ', 30) + comenta);
-    conse++;
-
-    if (nCuenta41350801>0)
-    {
-        MyValue4 = (conse.toString() + "03510004" + Empresa + nSede + (3, ' ') + "00000000" , "41350801" , "PLANILLA" + nSede + "99"  +
-               (' ', 15) + (' ', 10) + "+" +
-           "{0:000000000000000}", nCuenta41350801 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-           "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350801 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-           "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350801 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-           "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" +(' ', 30) + comenta);
-        conse++;
-    }
-      
-    // se inserta los totales de la cuenta 41350802 planilla
-    if (nCuenta41350802 > 0)
-    {
-        MyValue3 = (conse.toString()+ "03510004" + Empresa + nSede  + "00000000" , "41350802" , "PLANILLA" + nSede + "99" +
-              (' ', 15) + (' ', 10) + "+" +
-         ("{0:000000000000000}", nCuenta41350802 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350802 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350802 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-          "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" , ' ', 30) + comenta);
-        conse++;
-    }
-    // se inserta los totales de la cuenta 41350803 planilla
-    if (nCuenta41350803 > 0)
-    {
-       MyValue5 = (conse.toString() + "03510004" + Empresa + nSede  + "00000000" , "41350803" , "PLANILLA" + nSede + "99" +
-             (' ', 15) + (' ', 10) + "+" +
-         "{0:000000000000000}", nCuenta41350803 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-         "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350803+ ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-         "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350803 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-         "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" , (' ', 2) + "00000000" + (' ', 30) + comenta);
-        conse++;
-    }
-    // se inserta los totales de la cuenta 41350805 planilla
-    if (nCuenta41350805 > 0)
-    {
-        MyValue6 = (conse.toString() + "03510004" + Empresa + nSede  + "00000000" , "41350805" , "PLANILLA" + nSede + "99" +
-             (' ', 15) +(' ', 10) + "+" +
-       "{0:000000000000000}", nCuenta41350805 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350805 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-          "000000000000000.0000+" , "{0:000000000000000}", nCuenta41350805 + ".0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000+" +
-          "000000000000000.0000+000000000000000.0000+" , "000000000000000.0000+000000000000000.0000" + (' ', 2) + "00000000" + (' ', 30) + comenta);
-        conse++;
-
-        const blob = new Blob([Principio, MyValue,MyValue2,MyValue4,MyValue3,MyValue5, MyValue6], { type: 'text/plain;charset=utf-8' });
-        saveAs(blob, 'Plano Contable.txt');
-           
-    }
-}
-
-
     const columns = [{
         name: ' Id Sede',
         selector: row => row.IdSede,
@@ -269,7 +175,6 @@ const Plano = () => {
         selector: row => row.CantIdDocumento,
         sortable: true,
     },
-
     ]
 
 
@@ -314,6 +219,17 @@ const Plano = () => {
                     name="busqueda2"
                     value={busqueda2}
                     onChange={handleChange2} />
+                {/* <Calendar
+                 locale="es"
+                 format='YYYY-MM-DD'
+                 todayText = "Hoy"
+                 openOnInputFocus ="true"
+                 hideIcon = "true"
+                 placeholder="Buscar Fecha"
+                 date={busqueda2}
+                computableFormat='YYYYMMDD'
+                computableDate 
+                onChange={handleChange2} /> */}
                 <Input2
                     type="text"
                     placeholder="Buscar"

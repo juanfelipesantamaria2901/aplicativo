@@ -93,58 +93,16 @@ const Cartera4 = () => {
         setTablaUsuarios3(resultadosBusqueda2);
     }
 
-
+  
     const [relacional, setData] = useState([]);
-    const URL = 'http://192.168.10.247:3001/api/relacional'
-    const showData = async () => {
-      const response = await fetch(URL)
-      const data = await response.json()
-      setData(data)
+      
+    
+    const Relacionar = async () => {
+        const URL = 'http://192.168.10.247:3001/api/rel'
+        await fetch(URL)
     }
-    useEffect(() => {
-      showData()
-    }
-      , [])
+      
 
-
-    const [Data2, setData2] = useState([]);
-    const handleSubmit2 = async (e) => {
-        e.preventDefault();
-        const res = await fetch(`http://192.168.10.247:3001/api/rel/${TerceroMaster}`, {
-            method: "GET"
-        });
-        const data = await res.json();
-            setData2(data);
-            Nombre2.campo = data.Nombre;
-            Identificacion2.campo = data.Identificacion;
-        console.log(data);
-    }
-    useEffect(() => {
-        handleSubmit2();
-    }
-    , [])
-
-        //Mehotd for sent data to API
-        const handleSubmit = async (e) => {
-            e.preventDefault();
-            const res = await fetch(`http://192.168.10.247:3001/api/relacional/${TerceroMaster2}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    IdentificacionCliente,
-                    NombreCliente,
-                }),
-            });
-            const data = await res.json();
-            console.log(data);
-            if (data != null) {
-                window.alert("¡Informacion Guardada exitosamente!");
-            } else {
-                window.alert("¡Error al guardar la informacion!");
-            }
-        }
 
     //Values of the form to be sent to the API
     const [TerceroMaster, cambiarTerceroMaster] = useState("")
@@ -331,104 +289,12 @@ const Cartera4 = () => {
                     </div>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} href={"/Registro_Cartera"} >Agregar</Button>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} href={"/Actualizar"} >Actualizar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={handleShow} >Filtrar</Button>
+                    <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={Relacionar} >Relacionar</Button>
                     <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
                     <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
                 </section>
                 <Compoentedata />
             </div>
-
-            <Modal show={show} onHide={handleClose} animation={false} fullscreen={true}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Filtrados</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <section className="content">
-                    <div className="container-fluid">
-                        <div className="row">
-                            {/* left column */}
-                            <div className="col-md-12" style={{ "height": "950px" }}>
-                                {/* general form elements disabled */}
-                                <div className="card card-warning">
-                                    <div className="card-header bg-warning">
-                                        <h3 className="card-title"><b>Registro Relacional</b></h3>
-                                    </div>
-                                    {/* /.card-header */}
-                                    <div className="card-body ">
-                                        <form onSubmit={handleSubmit2}>
-                                            <div className="row">
-                                            <div className="col-sm-3">
-                                                    <div className="form-group">
-                                                        <Label className="Select-FormasPago">Tercero Master</Label>
-                                                        <Select name="FormasPago" id="FormasPago"
-                                                            Classname="form-select"
-                                                            showSearch
-                                                            value={TerceroMaster}
-                                                            onChange={(e) => cambiarTerceroMaster(e.target.value)}
-                                                            required>
-                                                            <option selected>Seleccione una opcion</option>
-                                                            {relacional.map((item, index) => (
-                                                                <option key={index} value={item.TerceroMaster}>{item.TerceroMaster}</option>
-                                                            ))}
-                                                        </Select>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-3">
-                                                    <div className="form-group">
-                                                    <Label className="Select-FormasPago">Identificacion Cliente</Label>
-                                                        <Select name="FormasPago" id="FormasPago"
-                                                            Classname="form-select"
-                                                            showSearch
-                                                            value={Identificacion2}
-                                                            onChange={(e) => cambiarIdentificacion(e.target.value)}
-                                                            required>
-                                                            <option selected>Seleccione una opcion</option>
-                                                            {relacional.map((item, index) => (
-                                                                <option key={index} value={item.Identificacion}>{item.Identificacion}</option>
-                                                            ))}
-                                                        </Select>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-3">
-                                                    <div className="form-group">
-                                                    <Label className="Select-FormasPago">Nombre Cliente</Label>
-                                                        <Select name="FormasPago" id="FormasPago"
-                                                            Classname="form-select"
-                                                            showSearch
-                                                            value={Nombre2}
-                                                            onChange={(e) => cambiarNombre(e.target.value)}
-                                                            required>
-                                                            <option selected>Seleccione una opcion</option>
-                                                            {relacional.map((item, index) => (
-                                                                <option key={index} value={item.Nombre}>{item.Nombre}</option>
-                                                            ))}
-                                                        </Select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-12">
-                                                <Button variant='warning' style={{ 'color': 'black' }} type="submit" ><b>Buscar</b></Button>
-                                            </div>
-                                        </form></div>
-                                </div>
-                                {/* /.card-body */}
-                            </div>
-                            {/* /.card */}
-                        </div>
-                        {/* /.card */}
-                    </div>
-                    {/*/.col */}
-                </section>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="warning" style={{ color: 'black' }} onClick={handleClose}>
-                        Cerrar
-                    </Button>
-                    <Button variant="warning" style={{ color: 'black' }} onClick={handleSubmit}>
-                        Guardar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </div >
     );
 }
