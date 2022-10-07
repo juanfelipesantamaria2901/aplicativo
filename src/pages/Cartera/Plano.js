@@ -220,17 +220,6 @@ const Plano = () => {
                     formTarget='YYYY-MM-DD'
                     value={busqueda2}
                     onChange={handleChange2} />
-                {/* <Calendar
-                 locale="es"
-                 format='YYYY-MM-DD'
-                 todayText = "Hoy"
-                 openOnInputFocus ="true"
-                 hideIcon = "true"
-                 placeholder="Buscar Fecha"
-                 date={busqueda2}
-                computableFormat='YYYYMMDD'
-                computableDate 
-                onChange={handleChange2} /> */}
                 <Input2
                     type="text"
                     placeholder="Buscar"
