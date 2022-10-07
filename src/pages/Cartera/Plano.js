@@ -9,7 +9,6 @@ import { Input2 } from '../../Components/Inputs/styles';
 import { CSVLink } from 'react-csv';
 import { Button, Card, } from 'react-bootstrap';
 // import './../../../node_modules/react-input-calendar/style/index.css'
-import Calendar from 'react-input-calendar'
 
 
 const paginacionOpciones = {
