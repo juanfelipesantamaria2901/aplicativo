@@ -213,10 +213,11 @@ const Plano = () => {
                     value={busqueda}
                     onChange={handleChange} />
                 <Input2
-                    type="text"
+                    type="date"
                     placeholder="Buscar Fecha"
                     className="textField"
                     name="busqueda2"
+                    formTarget='YYYY-MM-DD'
                     value={busqueda2}
                     onChange={handleChange2} />
                 {/* <Calendar

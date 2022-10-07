@@ -55,6 +55,7 @@ const Compoentedata = () => {
 
     const handleChange2 = e => {
         setBusqueda2(e.target.value)
+        console.log(e.target.value);
         filtrar2(e.target.value);
     }
 
@@ -128,7 +129,7 @@ const Compoentedata = () => {
         name: 'Sede',
         selector: row => row.IdSede,
         sortable: true,
-        maxWidth: '3%',
+        maxWidth : '3%',
         align: 'center',
     },
     {
@@ -136,32 +137,33 @@ const Compoentedata = () => {
         selector: row => row.IdTurno,
         sortable: true,
         align: 'center',
-        maxWidth: '5%',
+        maxWidth : '5%',
     },
     {
         name: 'Isla',
         selector: row => row.CodigoIsla,
         sortable: true,
-        maxWidth: '3%',
+        maxWidth : '3%',
         align: 'center',
     },
     {
         name: 'Vendedor',
         selector: row => row.NombreVendedor,
         sortable: true,
-        width: '200px',
+        width : '330px',
     },
     {
         name: 'Iden Cliente',
         selector: row => row.IdentificacionCliente,
         sortable: true,
         align: 'center',
+        width : '200px',
     },
     {
         name: 'Cliente',
         selector: row => row.NombreCliente,
         sortable: true,
-        width: '330px',
+        width: '430px',
     },
     {
         name: 'Id Doc',
@@ -174,7 +176,7 @@ const Compoentedata = () => {
         selector: row => row.Articulo,
         sortable: true,
         align: 'center',
-        width: '180px',
+        width : '180px',
     },
     {
         name: 'Volumen',
@@ -190,15 +192,21 @@ const Compoentedata = () => {
     },
     {
         name: 'Valor Venta',
-        selector: row => row.ValorVenta,
-        sortable: true,
+        selector: row => (row.ValorVenta).toLocaleString("en-US", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+        }),
+        sortable: false,
         align: 'center',
+        width : '140px',
     },
     {
         name: 'Placa',
         selector: row => row.Placa,
         sortable: true,
         align: 'center',
+        width: '120px',
     },
     {
         name: 'Forma Pago',
@@ -211,14 +219,14 @@ const Compoentedata = () => {
         name: 'Cara',
         selector: row => row.CodigoCara,
         sortable: true,
-        maxWidth: '3%',
+        maxWidth : '3%',
         align: 'center',
     },
     {
         name: 'Mangueral',
         selector: row => row.CodigoManguera,
         sortable: true,
-        maxWidth: '5%',
+        maxWidth : '5%',
         align: 'center',
     },
     {
@@ -238,6 +246,7 @@ const Compoentedata = () => {
         selector: row => row.FechaZeta,
         sortable: true,
         align: 'center',
+        width : '120px',
     },
     {
         name: 'Fecha',
@@ -261,14 +270,15 @@ const Compoentedata = () => {
         name: 'Rom',
         selector: row => row.Rom,
         sortable: true,
-        grow: '5',
-        width: 'auto',
+        grow : '5',
+        width: '190px',
     },
     {
         name: 'Cuenta',
         selector: row => row.Cuenta,
         sortable: true,
         align: 'center',
+        width : '330px',
     },
 
     ]
@@ -309,10 +319,11 @@ const Compoentedata = () => {
                     value={busqueda}
                     onChange={handleChange} />
                 <Input2
-                    type="text"
+                    type="date"
                     placeholder="Buscar Fecha"
                     className="textField"
                     name="busqueda2"
+                    formTarget='YYYY-MM-DD'
                     value={busqueda2}
                     onChange={handleChange2} />
                 <Input2
