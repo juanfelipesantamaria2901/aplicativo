@@ -246,7 +246,8 @@ const Plano = () => {
                     </div>
                 </div>
                 <CSVLink data={cartera} filename={"Exportacion.csv"}> <Button variant='warning' style={{ 'color': 'black' }}>Exportar Datos</Button></CSVLink>
-                <Button variant='warning' style={{ 'color': 'black' }} onClick={createFile}>Generar Plano</Button>
+                {/* <Button variant='warning' style={{ 'color': 'black' }} onClick={createFile}>Generar Plano</Button> */}
+                <a className="btn btn-warning" style={{color: 'black'}} target={'_blank'} href={`https://tsriverabravaapi.azurewebsites.net/api/GeneraPlanoContable/${fecha}/${busqueda}`}>Generar Plano</a>
             </section>
             <div className="row">
             </div>
