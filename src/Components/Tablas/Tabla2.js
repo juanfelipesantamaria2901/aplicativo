@@ -160,27 +160,25 @@ const Tabla2 = () => {
   return (
     <div>
       <header>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-          crossorigin="anonymous"
-        />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
-        <link rel="stylesheet"
-          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/plugins/table-editor.min.css" />
-        <link rel="stylesheet"
-          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/modules/b4bca5d779777cff9d5c51553952a0a1.min.css" />
-        <link rel="stylesheet" id="roboto-subset.css-css"
-          href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
-          type="text/css" media="all" />
+      <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+                    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+                    crossorigin="anonymous"
+                />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
+                <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
 
-
-        <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-        <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
+                <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+                <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+                <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+                <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
+                <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
+                <script src="http://cnd.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
 
         {['sm'].map((expand) => (
                     <Navbar key={expand} bg="dark" variant="dark" expand={expand} className="mb-3">
@@ -204,17 +202,17 @@ const Tabla2 = () => {
                                             title="Cartera"
                                             id={`offcanvasNavbarDropdown-expand-${expand}`}>
                                             <li>
-                                                <NavDropdown.Item  href="/DatosCartera">
+                                                <NavDropdown.Item href="/">
                                                     Cartera
                                                 </NavDropdown.Item>
                                             </li>
                                             <li>
-                                                <NavDropdown.Item active href="/Tabla">
+                                                <NavDropdown.Item active  href="/TablaRelacional">
                                                     Tabla Relacional
                                                 </NavDropdown.Item>
                                             </li>
                                             <li>
-                                                <NavDropdown.Item href="/Vista">
+                                                <NavDropdown.Item href="/Plano">
                                                     Vista Plano
                                                 </NavDropdown.Item>
                                             </li>
@@ -222,7 +220,7 @@ const Tabla2 = () => {
                                         <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                                         <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
                                     </Nav>
-                                    <Nav
+                                    {/* <Nav
                                         class="dropdown-toggle d-flex align-items-center hidden-arrow"
                                         href="#"
                                         id="navbarDropdownMenuAvatar"
@@ -244,15 +242,15 @@ const Tabla2 = () => {
                                         <li>
                                             <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
                                         </li>
-                                    </NavDropdown>
+                                    </NavDropdown> */}
                                     <Form className="d-flex">
-                                        <FormControl
+                                        {/* <FormControl
                                             type="search"
                                             placeholder="Buscar"
                                             className="me-2"
                                             aria-label="Search"
                                         />
-                                        <Button variant='warning' style={{ 'color': 'black' }}>Buscar</Button>
+                                        <Button variant='warning' style={{ 'color': 'black' }}>Buscar</Button> */}
                                     </Form>
                                 </Offcanvas.Body>
                             </Navbar.Offcanvas>
@@ -274,11 +272,11 @@ const Tabla2 = () => {
               </div>
             </div>
           </div>
-          <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Registro_Relacional">Agregar</Button>
+          {/* <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Registro_Relacional">Agregar</Button> */}
           <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Relacionar">Actualizar</Button>
-          <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Eliminar_Relacional">Eliminar</Button>
+          {/* <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Eliminar_Relacional">Eliminar</Button> */}
           <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
+            {/* <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button> */}
         </section>
         <div className="row">
         </div>

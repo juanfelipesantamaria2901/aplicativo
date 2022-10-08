@@ -5,7 +5,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import { Input2 } from '../../Components/Inputs/styles';
 import {
-  Button, Navbar, Nav, NavDropdown, Container, Offcanvas, FormControl, Form, Card,
+  Button, Navbar, Nav, NavDropdown, Container, Offcanvas,  Form, Card,
 } from 'react-bootstrap';
 
 const paginacionOpciones = {
@@ -196,7 +196,7 @@ const Tabla = () => {
                                 </Offcanvas.Header>
                                 <Offcanvas.Body>
                                     <Nav className="justify-content-end flex-grow-1 pe-3">
-                                        <Nav.Link href="/Dashboard"  >Dashboard</Nav.Link>
+                                        {/* <Nav.Link href="/Dashboard"  >Dashboard</Nav.Link> */}
                                         <NavDropdown
                                             title="Cartera"
                                             id={`offcanvasNavbarDropdown-expand-${expand}`}>
@@ -219,7 +219,7 @@ const Tabla = () => {
                                         <Nav.Link href="/Inventario">Control Mecanicos Inventario</Nav.Link>
                                         <Nav.Link href="/Ingreso">Ingreso</Nav.Link>
                                     </Nav>
-                                    <Nav
+                                    {/* <Nav
                                         class="dropdown-toggle d-flex align-items-center hidden-arrow"
                                         href="#"
                                         id="navbarDropdownMenuAvatar"
@@ -234,22 +234,22 @@ const Tabla = () => {
                                             alt="Black and White Portrait of a Man"
                                             loading="lazy"
                                         />
-                                    </Nav>
-                                    <NavDropdown
+                                    </Nav> */}
+                                    {/* <NavDropdown
                                         class="dropdown-menu dropdown-menu-end"
                                         aria-labelledby="navbarDropdownMenuAvatar">
                                         <li>
                                             <NavDropdown.Item class="dropdown-item" href="/">Salir</NavDropdown.Item>
                                         </li>
-                                    </NavDropdown>
+                                    </NavDropdown> */}
                                     <Form className="d-flex">
-                                        <FormControl
+                                        {/* <FormControl
                                             type="search"
                                             placeholder="Buscar"
                                             className="me-2"
                                             aria-label="Search"
                                         />
-                                        <Button variant='warning' style={{ 'color': 'black' }}>Buscar</Button>
+                                        <Button variant='warning' style={{ 'color': 'black' }}>Buscar</Button> */}
                                     </Form>
                                 </Offcanvas.Body>
                             </Navbar.Offcanvas>
@@ -275,7 +275,7 @@ const Tabla = () => {
           <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Relacionar">Actualizar</Button>
           <Button variant='warning' style={{ 'color': 'black' }}  disabled={disable} href="/Eliminar_Relacional">Eliminar</Button>
           <Button variant='warning' style={{ 'color': 'black' }} disabled={disable} onClick={() => setDisable(true)}>Confirmar</Button>
-                    <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
+          <Button variant='warning' style={{ 'color': 'black' }} onClick={() => setDisable(false)}>Cancelar</Button>
         </section>
         <div className="row">
         </div>
